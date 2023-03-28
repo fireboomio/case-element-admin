@@ -1,0 +1,38 @@
+[
+	{
+		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(GETApiV1RoleApisInput: {code: $code}) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
+		"createTime": "2023-03-28 10:10:29Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1516639650775040,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/System/GetRoleBindApis",
+		"updateTime": ""
+	},
+	{
+		"id": 1516639652216832,
+		"method": "POST",
+		"restUrl": "",
+		"operationType": "mutations",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
+		"title": "/System/BindRoleApis",
+		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {\n  data: system_bindRoleApis(\n    POSTApiV1RoleBindApiInput: {roleCode: $roleCode, apis: $apis, allRoles: $allRoles}\n  ) {\n    count\n  }\n}",
+		"enabled": true,
+		"createTime": "2023-03-28 10:10:29Z",
+		"updateTime": "",
+		"deleteTime": "",
+		"roleType": "",
+		"roles": ""
+	}
+]
