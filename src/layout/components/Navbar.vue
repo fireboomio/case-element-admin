@@ -1,166 +1,121 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useRoute, useRouter } from 'vue-router';
+import { useAppStore } from '@/store/modules/app';
+import { useTagsViewStore } from '@/store/modules/tagsView';
+import { useUserStore } from '@/store/modules/user';
+
+const appStore = useAppStore();
+const tagsViewStore = useTagsViewStore();
+const userStore = useUserStore();
+
+const route = useRoute();
+const router = useRouter();
+
+const { device } = storeToRefs(appStore); // 设备类型：desktop-宽屏设备 || mobile-窄屏设备
+
+function toggleSideBar() {
+  appStore.toggleSidebar(true);
+}
+
+// 注销
+function logout() {
+  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(() => {
+    userStore
+      .logout()
+      .then(() => {
+        tagsViewStore.delAllViews();
+      })
+      .then(() => {
+        router.push(`/login?redirect=${route.fullPath}`);
+      });
+  });
+}
+</script>
+
 <template>
+  <!-- 顶部导航栏 -->
   <div class="navbar">
-    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+    <!-- 左侧面包屑 -->
+    <div class="flex">
+      <hamburger
+        :is-active="appStore.sidebar.opened"
+        @toggleClick="toggleSideBar"
+      />
+      <breadcrumb />
+    </div>
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <!-- 右侧导航设置 -->
+    <div class="flex">
+      <!-- 导航栏设置(窄屏隐藏)-->
 
-    <div class="right-menu">
-      <template v-if="device!=='mobile'">
-        <search id="header-search" class="right-menu-item" />
-
-        <error-log class="errLog-container right-menu-item hover-effect" />
-
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
-        <el-tooltip content="Global Size" effect="dark" placement="bottom">
-          <size-select id="size-select" class="right-menu-item hover-effect" />
+      <div v-if="device !== 'mobile'" class="flex items-center">
+        <!--全屏 -->
+        <screenfull class="navbar-setting-item" />
+        <!-- 布局大小 -->
+        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+          <size-select class="navbar-setting-item" />
         </el-tooltip>
+        <!--语言选择-->
+        <lang-select class="navbar-setting-item" />
+      </div>
 
-      </template>
-
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
-        <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
+      <!-- 用户头像 -->
+      <el-dropdown trigger="click">
+        <div class="flex justify-center items-center mx-2">
+          <img
+            :src="userStore.avatar + '?imageView2/1/w/80/h/80'"
+            class="w-[40px] h-[40px] rounded-lg"
+          />
+          <i-ep-caret-bottom class="w-3 h-3" />
         </div>
-        <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/index">
-            <el-dropdown-item>Profile</el-dropdown-item>
-          </router-link>
-          <router-link to="/">
-            <el-dropdown-item>Dashboard</el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">Log Out</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <router-link to="/">
+              <el-dropdown-item>{{ $t('navbar.dashboard') }}</el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="https://github.com/hxrui">
+              <el-dropdown-item>Github</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://gitee.com/haoxr">
+              <el-dropdown-item>{{ $t('navbar.gitee') }}</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://www.cnblogs.com/haoxianrui/">
+              <el-dropdown-item>{{ $t('navbar.document') }}</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click="logout">
+              {{ $t('navbar.logout') }}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
     </div>
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import ErrorLog from '@/components/ErrorLog'
-import Screenfull from '@/components/Screenfull'
-import SizeSelect from '@/components/SizeSelect'
-import Search from '@/components/HeaderSearch'
-
-export default {
-  components: {
-    Breadcrumb,
-    Hamburger,
-    ErrorLog,
-    Screenfull,
-    SizeSelect,
-    Search
-  },
-  computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar',
-      'device'
-    ])
-  },
-  methods: {
-    toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
-    },
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
 .navbar {
+  background-color: #fff;
   height: 50px;
-  overflow: hidden;
-  position: relative;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 1px #0003;
 
-  .hamburger-container {
-    line-height: 46px;
-    height: 100%;
-    float: left;
-    cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, .025)
-    }
-  }
-
-  .breadcrumb-container {
-    float: left;
-  }
-
-  .errLog-container {
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  .right-menu {
-    float: right;
-    height: 100%;
+  .navbar-setting-item {
+    height: 50px;
     line-height: 50px;
-
-    &:focus {
-      outline: none;
-    }
-
-    .right-menu-item {
-      display: inline-block;
-      padding: 0 8px;
-      height: 100%;
-      font-size: 18px;
-      color: #5a5e66;
-      vertical-align: text-bottom;
-
-      &.hover-effect {
-        cursor: pointer;
-        transition: background .3s;
-
-        &:hover {
-          background: rgba(0, 0, 0, .025)
-        }
-      }
-    }
-
-    .avatar-container {
-      margin-right: 30px;
-
-      .avatar-wrapper {
-        margin-top: 5px;
-        position: relative;
-
-        .user-avatar {
-          cursor: pointer;
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-        }
-
-        .el-icon-caret-bottom {
-          cursor: pointer;
-          position: absolute;
-          right: -20px;
-          top: 25px;
-          font-size: 12px;
-        }
-      }
+    width: 30px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    color: #5a5e66;
+    &:hover {
+      background: rgba(249, 250, 251, 1);
     }
   }
 }

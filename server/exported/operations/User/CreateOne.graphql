@@ -1,0 +1,5 @@
+mutation MyQuery($avatarUrl: String, $id: String!, $name: String!) @internalOperation {
+  data: main_createOneUser(data: {id: $id, name: $name, avatarUrl: $avatarUrl}) {
+    id
+  }
+}

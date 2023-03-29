@@ -1,54 +1,45 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+
+import SidebarItem from './SidebarItem.vue';
+import Logo from './Logo.vue';
+
+import { useSettingsStore } from '@/store/modules/settings';
+import { usePermissionStore } from '@/store/modules/permission';
+import { useAppStore } from '@/store/modules/app';
+import { storeToRefs } from 'pinia';
+import variables from '@/styles/variables.module.scss';
+
+const settingsStore = useSettingsStore();
+const permissionStore = usePermissionStore();
+const appStore = useAppStore();
+
+const { sidebarLogo } = storeToRefs(settingsStore);
+const route = useRoute();
+</script>
+
 <template>
-  <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+  <div :class="{ 'has-logo': sidebarLogo }">
+    <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
+    <el-scrollbar>
       <el-menu
-        :default-active="activeMenu"
-        :collapse="isCollapse"
+        :default-active="route.path"
+        :collapse="!appStore.sidebar.opened"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
-        :unique-opened="false"
         :active-text-color="variables.menuActiveText"
+        :unique-opened="false"
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item
+          v-for="route in permissionStore.routes"
+          :item="route"
+          :key="route.path"
+          :base-path="route.path"
+          :is-collapse="!appStore.sidebar.opened"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
-
-<script>
-import { mapGetters } from 'vuex'
-import Logo from './Logo'
-import SidebarItem from './SidebarItem'
-import variables from '@/styles/variables.scss'
-
-export default {
-  components: { SidebarItem, Logo },
-  computed: {
-    ...mapGetters([
-      'permission_routes',
-      'sidebar'
-    ]),
-    activeMenu() {
-      const route = this.$route
-      const { meta, path } = route
-      // if set path, the sidebar will highlight the path you set
-      if (meta.activeMenu) {
-        return meta.activeMenu
-      }
-      return path
-    },
-    showLogo() {
-      return this.$store.state.settings.sidebarLogo
-    },
-    variables() {
-      return variables
-    },
-    isCollapse() {
-      return !this.sidebar.opened
-    }
-  }
-}
-</script>

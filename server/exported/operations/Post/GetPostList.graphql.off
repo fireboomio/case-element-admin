@@ -1,0 +1,23 @@
+query GetPostList($take: Int = 10, $skip: Int = 0, $orderBy: [main_PostOrderByWithRelationInput], $query: main_PostWhereInput) {
+  data: main_findManyPost(
+    skip: $skip
+    take: $take
+  orderBy: $orderBy
+    where: {AND: $query}) {
+    
+    id
+    title
+    poster
+    publishedAt
+    authorId
+    User {
+      name
+      avatarUrl
+    }
+  }
+  total: main_aggregatePost(where: {AND: $query}) @transform(get: "_count.id") {
+    _count {
+      id
+    }
+  }
+}

@@ -1,0 +1,5 @@
+query MyQuery($id: String!) @internalOperation {
+  data: main_findFirstUser(where: {id: {equals: $id}}) {
+    id
+  }
+}

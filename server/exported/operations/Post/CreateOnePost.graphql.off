@@ -1,0 +1,16 @@
+mutation CreateOnePost($title: String!, $poster: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID)) {
+  data: main_createOnePost(
+    data: {title: $title, poster: $poster, publishedAt: $publishedAt, User: {connect: {id: $userId}}}
+  ) {
+    id
+    title
+    poster
+    publishedAt
+    authorId
+    User {
+      name
+      id
+      avatarUrl
+    }
+  }
+}

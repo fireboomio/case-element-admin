@@ -1,0 +1,7 @@
+query MyQuery($equals: String! @fromClaim(name: USERID)) {
+  data: main_findFirstUser(where: {id: {equals: $equals}}) {
+    name
+    id
+    avatarUrl
+  }
+}

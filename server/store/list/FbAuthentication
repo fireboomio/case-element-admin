@@ -1,0 +1,36 @@
+[
+	{
+		"id": 1521691663073280,
+		"point": "http://localhost:9991/auth/cookie/authorize/auth0?redirect_uri=",
+		"name": "auth0",
+		"authSupplier": "openid",
+		"switchState": [
+			"cookieBased"
+		],
+		"config": {
+			"id": "auth0",
+			"clientId": {
+				"key": "",
+				"kind": "0",
+				"val": "LNUYuBUfuAbqtMRbKAbaXFdbLuB3V3FQ"
+			},
+			"clientSecret": {
+				"key": "",
+				"kind": "0",
+				"val": "y1ecLIREalDgjVF63d5l8o0NYjZXe-bRe7QbnRZ6zwShNNuaEEs7kRf8o7BbhQgG"
+			},
+			"issuer": "https://erguotou.jp.auth0.com",
+			"discoveryURL": "",
+			"jwks": 0,
+			"jwksJSON": "",
+			"jwksURL": "https://erguotou.jp.auth0.com/.well-known/jwks.json",
+			"userInfoEndpoint": "https://erguotou.jp.auth0.com/userinfo",
+			"userInfoCacheTtlSeconds": 0,
+			"AuthorizationEndpoint": "https://erguotou.jp.auth0.com/authorize",
+			"tokenEndpoint": "https://erguotou.jp.auth0.com/oauth/token"
+		},
+		"createTime": "2023-03-29 07:35:16Z",
+		"updateTime": "2023-03-29 09:34:33Z",
+		"deleteTime": ""
+	}
+]

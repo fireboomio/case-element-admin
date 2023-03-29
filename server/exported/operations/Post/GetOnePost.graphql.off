@@ -1,0 +1,15 @@
+query GetOnePost($id: Int!) {
+  data: main_findFirstPost(where: {id: {equals: $id}}) {
+    
+    id
+    title
+    poster
+    publishedAt
+    authorId
+    User {
+      name
+      id
+      avatarUrl
+    }
+  }
+}

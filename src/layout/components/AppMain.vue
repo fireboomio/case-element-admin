@@ -1,26 +1,20 @@
+<script setup lang="ts">
+import { useTagsViewStore } from '@/store/modules/tagsView';
+
+const tagsViewStore = useTagsViewStore();
+</script>
+
 <template>
   <section class="app-main">
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view :key="key" />
-      </keep-alive>
-    </transition>
+    <router-view v-slot="{ Component, route }">
+      <transition name="router-fade" mode="out-in">
+        <keep-alive :include="tagsViewStore.cachedViews">
+          <component :is="Component" :key="route.fullPath" />
+        </keep-alive>
+      </transition>
+    </router-view>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'AppMain',
-  computed: {
-    cachedViews() {
-      return this.$store.state.tagsView.cachedViews
-    },
-    key() {
-      return this.$route.path
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .app-main {
@@ -29,9 +23,10 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: var(--el-bg-color-page);
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 
@@ -41,17 +36,9 @@ export default {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
-  }
-}
-</style>
-
-<style lang="scss">
-// fix css style bug in open el-dialog
-.el-popup-parent--hidden {
-  .fixed-header {
-    padding-right: 15px;
+    min-height: 100vh;
   }
 }
 </style>
