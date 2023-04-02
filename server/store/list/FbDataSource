@@ -15,9 +15,6 @@
 		"updateTime": ""
 	},
 	{
-		"id": 1520738718449664,
-		"name": "main",
-		"sourceType": 1,
 		"config": {
 			"apiNamespace": "main",
 			"appendType": "",
@@ -43,9 +40,25 @@
 				"val": ""
 			}
 		},
-		"enabled": true,
 		"createTime": "2023-03-29 03:32:55Z",
-		"updateTime": "2023-03-29 03:32:57Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1520738718449664,
+		"name": "main",
+		"sourceType": 1,
+		"updateTime": "2023-03-29 03:32:57Z"
+	},
+	{
+		"id": 1546177283227648,
+		"name": "statistics",
+		"sourceType": 4,
+		"config": {
+			"apiNamespace": "statistics",
+			"serverName": "statistics"
+		},
+		"enabled": true,
+		"createTime": "2023-04-02 15:22:17Z",
+		"updateTime": "2023-04-02 15:30:20Z",
 		"deleteTime": ""
 	}
 ]

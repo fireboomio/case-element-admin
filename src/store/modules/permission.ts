@@ -95,7 +95,32 @@ export const usePermissionStore = defineStore('permission', () => {
       //   .catch(error => {
       //     reject(error);
       //   });
-      resolve([])
+      resolve([
+        {
+          path: '/post',
+          name: 'post',
+          component: Layout,
+          children: [
+            {
+              path: '/',
+              name: 'postList',
+              component: () => import('@/views/post/index.vue'),
+              meta: {
+                title: '文章管理',
+                icon: 'api',
+                hidden: false,
+                roles: ['admin'],
+              }
+            }
+          ],
+          meta: {
+            title: '文章',
+            icon: 'api',
+            hidden: false,
+            roles: ['admin'],
+          }
+        }
+      ])
     });
   }
   return { routes, setRoutes, generateRoutes };

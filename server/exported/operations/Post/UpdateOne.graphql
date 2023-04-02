@@ -1,4 +1,4 @@
-mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String = "") {
+mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String) {
   data: main_updateOnePost(
     data: {title: {set: $title}, poster: {set: $poster}, publishedAt: {set: $publishedAt}, content: {set: $content}}
     where: {id: $id}
@@ -13,5 +13,6 @@ mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt:
       id
       avatarUrl
     }
+    content
   }
 }

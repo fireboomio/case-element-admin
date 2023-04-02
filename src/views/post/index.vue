@@ -9,9 +9,9 @@ export default {
 import api, { convertPageQuery } from '@/api';
 import {
   Post__CreateOneInput,
-  Post__GetListResponse,
-  Post__GetOneResponse
+  Post__GetListResponse
 } from '@/api/models';
+import { merge } from '@/utils';
 import WangEditor from '@/components/WangEditor/index.vue';
 import { FormItemRule } from 'element-plus';
 import { Arrayable } from 'element-plus/es/utils';
@@ -100,7 +100,7 @@ async function openDialog(id?: number) {
     });
     if (!error) {
       dialog.visible = true;
-      Object.assign(formData, data!.data!);
+      merge(formData, data!.data!);
     } else {
       ElMessage.error('获取数据失败');
     }
@@ -111,7 +111,7 @@ async function openDialog(id?: number) {
 }
 
 /**
- * 字典类型表单提交
+ * 表单提交
  */
 function handleSubmit() {
   loading.value = false;
@@ -196,28 +196,6 @@ function handleDelete(id?: number) {
   });
 }
 
-const detailDialog = reactive<DialogOption>({
-  visible: false
-});
-
-// 当前选中的字典类型
-const detailData = ref<Post__GetOneResponse>();
-
-/**
- * 打开字典弹窗
- */
-function openDetailDialog(row: Post__GetOneResponse) {
-  detailDialog.visible = true;
-  detailData.value = row;
-}
-
-/**
- * 关闭详情弹窗
- */
-function closeDetailDialog() {
-  detailDialog.visible = false;
-}
-
 onMounted(() => {
   handleQuery();
 });
@@ -273,23 +251,9 @@ onMounted(() => {
             />
           </template>
         </el-table-column>
-
-        <!-- <el-table-column label="状态" align="center" width="100">
-          <template #default="scope">
-            <el-tag v-if="scope.row.status === 1" type="success">启用</el-tag>
-            <el-tag v-else type="info">禁用</el-tag>
-          </template>
-        </el-table-column> -->
-        <el-table-column label="发布时间" prop="publishedAt" align="center" />
+        <el-table-column label="发布时间" prop="publishedAt" align="center" :formatter="(row, col, v) => v ? new Date(v).toLocaleDateString() : ''" />
         <el-table-column fixed="right" label="操作" align="center" width="220">
           <template #default="scope">
-            <el-button
-              type="primary"
-              link
-              size="small"
-              @click.stop="openDetailDialog(scope.row)"
-              ><i-ep-Collection />详情</el-button
-            >
             <el-button
               type="primary"
               link
@@ -339,8 +303,8 @@ onMounted(() => {
           />
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <!-- <WangEditor v-model="formData.content" /> -->
-          <el-input type="textarea" :rows="5" v-model="formData.content" placeholder="请输入文章内容" />
+          <WangEditor v-model="formData.content" />
+          <!-- <el-input type="textarea" :rows="5" v-model="formData.content" placeholder="请输入文章内容" /> -->
         </el-form-item>
         <el-form-item label="发布时间" prop="publishedAt">
           <el-date-picker
@@ -356,29 +320,6 @@ onMounted(() => {
           <el-button @click="closeDialog">取 消</el-button>
         </div>
       </template>
-    </el-dialog>
-
-    <!--详情-->
-    <el-dialog
-      title="详情"
-      v-model="detailDialog.visible"
-      width="800px"
-      @close="closeDetailDialog"
-    >
-      <el-descriptions direction="vertical" :column="2" size="large" border>
-        <el-descriptions-item label="标题">{{
-          detailDialog.title
-        }}</el-descriptions-item>
-        <el-descriptions-item label="标题">{{
-          detailDialog.title
-        }}</el-descriptions-item>
-        <el-descriptions-item label="标题">{{
-          detailDialog.title
-        }}</el-descriptions-item>
-        <el-descriptions-item label="标题">{{
-          detailDialog.title
-        }}</el-descriptions-item>
-      </el-descriptions>
     </el-dialog>
   </div>
 </template>

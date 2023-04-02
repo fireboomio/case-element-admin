@@ -16,7 +16,7 @@ import {
 } from "fireboom-wundersdk/client";
 
 import type { CustomClaims, Role } from './claims'
-import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,User__CountUsersResponse,            User__CountUsersResponseData,User__CreateOneInput,User__CreateOneResponse,            User__CreateOneResponseData,User__GetOneInput,User__GetOneResponse,            User__GetOneResponseData,User__MeResponse,            User__MeResponseData, } from './models'
+import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,Statistics__MonthlySalesResponse,            Statistics__MonthlySalesResponseData,Statistics__SaleTypePercentResponse,            Statistics__SaleTypePercentResponseData,Statistics__SalesTop10Response,            Statistics__SalesTop10ResponseData,Statistics__VisitTrendingResponse,            Statistics__VisitTrendingResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,User__CountUsersResponse,            User__CountUsersResponseData,User__CreateOneInput,User__CreateOneResponse,            User__CreateOneResponseData,User__GetOneInput,User__GetOneResponse,            User__GetOneResponseData,User__MeResponse,            User__MeResponseData, } from './models'
 
 export const WUNDERGRAPH_S3_ENABLED = false
 export const WUNDERGRAPH_AUTH_ENABLED = true
@@ -32,10 +32,9 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-    applicationHash: "38355520",
+    applicationHash: "0f121f75",
     baseURL: "http://localhost:9991",
     sdkVersion: "",
-    customFetch: fetch,
 }
 
 export const operationMetadata: OperationMetadata = {
@@ -60,6 +59,22 @@ export const operationMetadata: OperationMetadata = {
 		}
     ,
     "Post/UpdateOne": {
+        requiresAuthentication: false
+		}
+    ,
+    "Statistics/MonthlySales": {
+        requiresAuthentication: false
+		}
+    ,
+    "Statistics/SaleTypePercent": {
+        requiresAuthentication: false
+		}
+    ,
+    "Statistics/SalesTop10": {
+        requiresAuthentication: false
+		}
+    ,
+    "Statistics/VisitTrending": {
         requiresAuthentication: false
 		}
     ,
@@ -143,6 +158,30 @@ export type Queries = {
     'Post/GetOne': {
         input: Post__GetOneInput
         data: Post__GetOneResponseData
+        requiresAuthentication: false
+        
+    }
+    'Statistics/MonthlySales': {
+        input?: undefined
+        data: Statistics__MonthlySalesResponseData
+        requiresAuthentication: false
+        
+    }
+    'Statistics/SaleTypePercent': {
+        input?: undefined
+        data: Statistics__SaleTypePercentResponseData
+        requiresAuthentication: false
+        
+    }
+    'Statistics/SalesTop10': {
+        input?: undefined
+        data: Statistics__SalesTop10ResponseData
+        requiresAuthentication: false
+        
+    }
+    'Statistics/VisitTrending': {
+        input?: undefined
+        data: Statistics__VisitTrendingResponseData
         requiresAuthentication: false
         
     }

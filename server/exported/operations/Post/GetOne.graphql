@@ -1,6 +1,5 @@
 query GetOnePost($id: Int!) {
   data: main_findFirstPost(where: {id: {equals: $id}}) {
-    
     id
     title
     poster
@@ -11,5 +10,6 @@ query GetOnePost($id: Int!) {
       id
       avatarUrl
     }
+    content
   }
 }

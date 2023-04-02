@@ -1,4 +1,4 @@
-mutation CreateOnePost($title: String!, $poster: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID), $content: String = "") {
+mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID)) {
   data: main_createOnePost(
     data: {title: $title, poster: $poster, publishedAt: $publishedAt, User: {connect: {id: $userId}}, content: $content}
   ) {
