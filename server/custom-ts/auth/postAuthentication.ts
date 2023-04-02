@@ -2,9 +2,9 @@ import type { AuthenticationHookRequest } from 'fireboom-wundersdk/server'
 
 export default async function postAuthentication(hook: AuthenticationHookRequest): Promise<void> {
   if (hook.user) {
-    const { provider, providerId, userId } = hook.user
+    const { providerId, userId } = hook.user
     const { picture, name } = hook.user.idToken!
-    const resp = await hook.internalClient.queries.User__GetOneUser({
+    const resp = await hook.internalClient.queries.User__GetOne({
       input: {
         id: userId,
       },
@@ -12,18 +12,18 @@ export default async function postAuthentication(hook: AuthenticationHookRequest
     if (!resp.error) {
       const existedUser = resp.data!.data
       if (!existedUser) {
-        const rest = await hook.internalClient.mutations.User__CreateOneUser({
+        const userCount = await hook.internalClient.queries.User__CountUsers({})
+        const rest = await hook.internalClient.mutations.User__CreateOne({
           input: {
             name: name as string,
-            provider: provider!,
-            providerId: providerId!,
             id: userId!,
-            avatar: picture as string,
-            bio: '',
+            avatarUrl: picture as string,
+            role: userCount.data?.data?.count.id === 0 ? 'admin' : 'user',
           },
         })
-        if (!rest.error)
+        if (!rest.error) {
           console.info(`Success sync user: ${providerId} - ${name}`)
+        }
       }
     }
   }

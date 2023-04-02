@@ -2,9 +2,9 @@ query GetPostList($take: Int = 10, $skip: Int = 0, $orderBy: [main_PostOrderByWi
   data: main_findManyPost(
     skip: $skip
     take: $take
-  orderBy: $orderBy
-    where: {AND: $query}) {
-    
+    orderBy: $orderBy
+    where: {AND: $query}
+  ) {
     id
     title
     poster

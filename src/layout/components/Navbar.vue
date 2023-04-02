@@ -66,25 +66,22 @@ function logout() {
 
       <!-- 用户头像 -->
       <el-dropdown trigger="click">
-        <div class="flex justify-center items-center mx-2">
+        <div class="flex mx-2 justify-center items-center">
           <img
             :src="userStore.avatar + '?imageView2/1/w/80/h/80'"
-            class="w-[40px] h-[40px] rounded-lg"
+            class="rounded-lg h-[40px] w-[40px]"
           />
-          <i-ep-caret-bottom class="w-3 h-3" />
+          <i-ep-caret-bottom class="h-3 w-3" />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
             <router-link to="/">
               <el-dropdown-item>{{ $t('navbar.dashboard') }}</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="https://github.com/hxrui">
+            <a target="_blank" href="https://github.com/fireboomio/case-element-admin">
               <el-dropdown-item>Github</el-dropdown-item>
             </a>
-            <a target="_blank" href="https://gitee.com/haoxr">
-              <el-dropdown-item>{{ $t('navbar.gitee') }}</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://www.cnblogs.com/haoxianrui/">
+            <a target="_blank" href="https://ansons-organization.gitbook.io/product-manual">
               <el-dropdown-item>{{ $t('navbar.document') }}</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click="logout">

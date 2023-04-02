@@ -3,5 +3,8 @@ query MyQuery($equals: String! @fromClaim(name: USERID)) {
     name
     id
     avatarUrl
+    roles: Role {
+      code
+    }
   }
 }

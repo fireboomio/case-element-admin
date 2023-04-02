@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 
-import { resetRouter } from '@/router';
 import { store } from '@/store';
 
 import { useStorage } from '@vueuse/core';
@@ -9,11 +8,18 @@ import api from '@/api';
 export const useUserStore = defineStore('user', () => {
   // state
   const token = useStorage('accessToken', '');
+  // 是否初始化获取过用户信息
+  const inited = ref(false);
   const nickname = ref('');
   const avatar = ref('');
   const roles = ref<Array<string>>([]); // 用户角色编码集合 → 判断路由权限
   const perms = ref<Array<string>>([]); // 用户权限编码集合 → 判断按钮权限
-
+  async function init() {
+    if (!inited.value) {
+      await getInfo()
+      inited.value = true
+    }
+  }
   /**
    * 登录调用
    *
@@ -42,46 +48,15 @@ export const useUserStore = defineStore('user', () => {
     if (!error) {
       nickname.value = data!.data!.name!
       avatar.value = data!.data!.avatarUrl!
-      roles.value = []
+      roles.value = data!.data!.roles?.map(item => item.code!) ?? []
       perms.value = []
       return data
-    } else {
-      throw error
     }
-    // return new Promise<UserInfo>((resolve, reject) => {
-    //   getUserInfo()
-    //     .then(({ data }) => {
-    //       if (!data) {
-    //         return reject('Verification failed, please Login again.');
-    //       }
-    //       if (!data.roles || data.roles.length <= 0) {
-    //         reject('getUserInfo: roles must be a non-null array!');
-    //       }
-    //       nickname.value = data.nickname;
-    //       avatar.value = data.avatar;
-    //       roles.value = data.roles;
-    //       perms.value = data.perms;
-    //       resolve(data);
-    //     })
-    //     .catch(error => {
-    //       reject(error);
-    //     });
-    // });
   }
 
   // 注销
   function logout() {
-    return new Promise<void>((resolve, reject) => {
-      // logoutApi()
-      //   .then(() => {
-      //     resetRouter();
-      //     resetToken();
-      //     resolve();
-      //   })
-      //   .catch(error => {
-      //     reject(error);
-      //   });
-    });
+    return api.logout()
   }
 
   // 重置
@@ -98,6 +73,7 @@ export const useUserStore = defineStore('user', () => {
     avatar,
     roles,
     perms,
+    init,
     login,
     getInfo,
     logout,

@@ -1,0 +1,17 @@
+mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String = "") {
+  data: main_updateOnePost(
+    data: {title: {set: $title}, poster: {set: $poster}, publishedAt: {set: $publishedAt}, content: {set: $content}}
+    where: {id: $id}
+  ) {
+    id
+    title
+    poster
+    publishedAt
+    authorId
+    User {
+      name
+      id
+      avatarUrl
+    }
+  }
+}

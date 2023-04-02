@@ -5,7 +5,16 @@ declare global {
   interface PageQuery {
     pageNum: number;
     pageSize: number;
+    [key: string]: string | number | boolean;
   }
+
+  interface FireboomQuery {
+    skip: number
+    take: number
+    [key: string]: FireboomQueryValue
+  }
+
+  type FireboomQueryValue = string | number | boolean | object | null
 
   /**
    * 分页响应对象
@@ -14,7 +23,7 @@ declare global {
     /**
      * 数据列表
      */
-    list: T;
+    data: T;
     /**
      * 数据总数
      */

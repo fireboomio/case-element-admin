@@ -1,4 +1,4 @@
-mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {
+mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {
   data: system_bindRoleApis(
     POSTApiV1RoleBindApiInput: {roleCode: $roleCode, apis: $apis, allRoles: $allRoles}
   ) {

@@ -16,7 +16,7 @@ import {
 } from "fireboom-wundersdk/client";
 
 import type { CustomClaims, Role } from './claims'
-import type { Post__CreateOnePostInput,Post__CreateOnePostResponse,            Post__CreateOnePostResponseData,Post__DeleteManyPostInput,Post__DeleteManyPostResponse,            Post__DeleteManyPostResponseData,Post__DeleteOnePostInput,Post__DeleteOnePostResponse,            Post__DeleteOnePostResponseData,Post__GetOnePostInput,Post__GetOnePostResponse,            Post__GetOnePostResponseData,Post__GetPostListInput,Post__GetPostListResponse,            Post__GetPostListResponseData,Post__UpdateOnePostInput,Post__UpdateOnePostResponse,            Post__UpdateOnePostResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,User__CreateOneInput,User__CreateOneResponse,            User__CreateOneResponseData,User__GetOneInput,User__GetOneResponse,            User__GetOneResponseData,User__MeResponse,            User__MeResponseData, } from './models'
+import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,User__CountUsersResponse,            User__CountUsersResponseData,User__CreateOneInput,User__CreateOneResponse,            User__CreateOneResponseData,User__GetOneInput,User__GetOneResponse,            User__GetOneResponseData,User__MeResponse,            User__MeResponseData, } from './models'
 
 export const WUNDERGRAPH_S3_ENABLED = false
 export const WUNDERGRAPH_AUTH_ENABLED = true
@@ -32,42 +32,46 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-    applicationHash: "4811014d",
+    applicationHash: "38355520",
     baseURL: "http://localhost:9991",
     sdkVersion: "",
     customFetch: fetch,
 }
 
 export const operationMetadata: OperationMetadata = {
-    "Post/CreateOnePost": {
+    "Post/CreateOne": {
         requiresAuthentication: true
 		}
     ,
-    "Post/DeleteManyPost": {
+    "Post/DeleteMany": {
         requiresAuthentication: false
 		}
     ,
-    "Post/DeleteOnePost": {
+    "Post/DeleteOne": {
         requiresAuthentication: false
 		}
     ,
-    "Post/GetOnePost": {
+    "Post/GetList": {
         requiresAuthentication: false
 		}
     ,
-    "Post/GetPostList": {
+    "Post/GetOne": {
         requiresAuthentication: false
 		}
     ,
-    "Post/UpdateOnePost": {
+    "Post/UpdateOne": {
         requiresAuthentication: false
 		}
     ,
     "System/BindRoleApis": {
-        requiresAuthentication: false
+        requiresAuthentication: true
 		}
     ,
     "System/GetRoleBindApis": {
+        requiresAuthentication: true
+		}
+    ,
+    "User/CountUsers": {
         requiresAuthentication: false
 		}
     ,
@@ -130,21 +134,27 @@ export const createClient = (config?: CreateClientConfig) => {
 };
 
 export type Queries = {
-    'Post/GetOnePost': {
-        input: Post__GetOnePostInput
-        data: Post__GetOnePostResponseData
+    'Post/GetList': {
+        input: Post__GetListInput
+        data: Post__GetListResponseData
         requiresAuthentication: false
         
     }
-    'Post/GetPostList': {
-        input: Post__GetPostListInput
-        data: Post__GetPostListResponseData
+    'Post/GetOne': {
+        input: Post__GetOneInput
+        data: Post__GetOneResponseData
         requiresAuthentication: false
         
     }
     'System/GetRoleBindApis': {
         input: System__GetRoleBindApisInput
         data: System__GetRoleBindApisResponseData
+        requiresAuthentication: true
+        
+    }
+    'User/CountUsers': {
+        input?: undefined
+        data: User__CountUsersResponseData
         requiresAuthentication: false
         
     }
@@ -163,30 +173,30 @@ export type Queries = {
 }
 
 export type Mutations = {
-    'Post/CreateOnePost': {
-        input: Post__CreateOnePostInput
-        data: Post__CreateOnePostResponseData
+    'Post/CreateOne': {
+        input: Post__CreateOneInput
+        data: Post__CreateOneResponseData
         requiresAuthentication: true
     }
-    'Post/DeleteManyPost': {
-        input: Post__DeleteManyPostInput
-        data: Post__DeleteManyPostResponseData
+    'Post/DeleteMany': {
+        input: Post__DeleteManyInput
+        data: Post__DeleteManyResponseData
         requiresAuthentication: false
     }
-    'Post/DeleteOnePost': {
-        input: Post__DeleteOnePostInput
-        data: Post__DeleteOnePostResponseData
+    'Post/DeleteOne': {
+        input: Post__DeleteOneInput
+        data: Post__DeleteOneResponseData
         requiresAuthentication: false
     }
-    'Post/UpdateOnePost': {
-        input: Post__UpdateOnePostInput
-        data: Post__UpdateOnePostResponseData
+    'Post/UpdateOne': {
+        input: Post__UpdateOneInput
+        data: Post__UpdateOneResponseData
         requiresAuthentication: false
     }
     'System/BindRoleApis': {
         input: System__BindRoleApisInput
         data: System__BindRoleApisResponseData
-        requiresAuthentication: false
+        requiresAuthentication: true
     }
     'User/CreateOne': {
         input: User__CreateOneInput

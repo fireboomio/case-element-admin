@@ -1,6 +1,6 @@
 [
 	{
-		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(GETApiV1RoleApisInput: {code: $code}) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
+		"content": "query GetRoleBindApis($code: String!) @rbac(requireMatchAny: [admin]) {\n  data: system_getRoleBindApis(GETApiV1RoleApisInput: {code: $code}) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
 		"createTime": "2023-03-28 10:10:29Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -12,13 +12,13 @@
 		"operationType": "queries",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]",
 		"title": "/System/GetRoleBindApis",
-		"updateTime": ""
+		"updateTime": "2023-03-30 06:38:35Z"
 	},
 	{
-		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) {\n  data: system_bindRoleApis(\n    POSTApiV1RoleBindApiInput: {roleCode: $roleCode, apis: $apis, allRoles: $allRoles}\n  ) {\n    count\n  }\n}",
+		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {\n  data: system_bindRoleApis(\n    POSTApiV1RoleBindApiInput: {roleCode: $roleCode, apis: $apis, allRoles: $allRoles}\n  ) {\n    count\n  }\n}",
 		"createTime": "2023-03-28 10:10:29Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -30,16 +30,16 @@
 		"operationType": "mutations",
 		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]",
 		"title": "/System/BindRoleApis",
-		"updateTime": ""
+		"updateTime": "2023-03-30 06:38:28Z"
 	},
 	{
-		"content": "mutation CreateOnePost($title: String!, $poster: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID)) {\n  data: main_createOnePost(\n    data: {title: $title, poster: $poster, publishedAt: $publishedAt, User: {connect: {id: $userId}}}\n  ) {\n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
+		"content": "mutation CreateOnePost($title: String!, $poster: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID), $content: String = \"\") {\n  data: main_createOnePost(\n    data: {title: $title, poster: $poster, publishedAt: $publishedAt, User: {connect: {id: $userId}}, content: $content}\n  ) {\n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
-		"enabled": false,
+		"enabled": true,
 		"id": 1520776042184704,
 		"illegal": false,
 		"isPublic": true,
@@ -50,14 +50,14 @@
 		"restUrl": "",
 		"roleType": "",
 		"roles": "",
-		"title": "/Post/CreateOnePost",
-		"updateTime": "2023-03-29 03:44:26Z"
+		"title": "/Post/CreateOne",
+		"updateTime": "2023-03-30 07:38:24Z"
 	},
 	{
 		"content": "mutation DeleteOnePost($id: Int!) {\n  data: main_deleteOnePost(where: {id: $id}) {\n    id\n  }\n}",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
-		"enabled": false,
+		"enabled": true,
 		"id": 1520776043888640,
 		"illegal": false,
 		"isPublic": true,
@@ -68,14 +68,14 @@
 		"restUrl": "",
 		"roleType": "",
 		"roles": "",
-		"title": "/Post/DeleteOnePost",
-		"updateTime": ""
+		"title": "/Post/DeleteOne",
+		"updateTime": "2023-03-30 07:38:31Z"
 	},
 	{
-		"content": "mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $User: main_UserUpdateOneRequiredWithoutPostNestedInput) {\n  data: main_updateOnePost(\n    data: {title: {set: $title}, poster: {set: $poster}, publishedAt: {set: $publishedAt}, User: $User}\n    where: {id: $id}\n  ) {\n    \n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
+		"content": "mutation UpdateOnePost($id: Int!, $title: String, $poster: String, $publishedAt: DateTime, $content: String = \"\") {\n  data: main_updateOnePost(\n    data: {title: {set: $title}, poster: {set: $poster}, publishedAt: {set: $publishedAt}, content: {set: $content}}\n    where: {id: $id}\n  ) {\n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
-		"enabled": false,
+		"enabled": true,
 		"id": 1520776045789184,
 		"illegal": false,
 		"isPublic": true,
@@ -86,14 +86,14 @@
 		"restUrl": "",
 		"roleType": "",
 		"roles": "",
-		"title": "/Post/UpdateOnePost",
-		"updateTime": ""
+		"title": "/Post/UpdateOne",
+		"updateTime": "2023-03-30 07:39:22Z"
 	},
 	{
 		"content": "query GetOnePost($id: Int!) {\n  data: main_findFirstPost(where: {id: {equals: $id}}) {\n    \n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
-		"enabled": false,
+		"enabled": true,
 		"id": 1520776047689728,
 		"illegal": false,
 		"isPublic": true,
@@ -104,32 +104,32 @@
 		"restUrl": "",
 		"roleType": "",
 		"roles": "",
-		"title": "/Post/GetOnePost",
-		"updateTime": ""
+		"title": "/Post/GetOne",
+		"updateTime": "2023-03-30 07:38:35Z"
 	},
 	{
-		"content": "query GetPostList($take: Int = 10, $skip: Int = 0, $orderBy: [main_PostOrderByWithRelationInput], $query: main_PostWhereInput) {\n  data: main_findManyPost(\n    skip: $skip\n    take: $take\n  orderBy: $orderBy\n    where: {AND: $query}) {\n    \n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      avatarUrl\n    }\n  }\n  total: main_aggregatePost(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}",
-		"createTime": "2023-03-29 03:42:25Z",
-		"deleteTime": "",
-		"enabled": false,
 		"id": 1520776049197056,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
 		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
 		"restUrl": "",
+		"operationType": "queries",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
+		"title": "/Post/GetList",
+		"content": "query GetPostList($take: Int = 10, $skip: Int = 0, $orderBy: [main_PostOrderByWithRelationInput], $query: main_PostWhereInput) {\n  data: main_findManyPost(\n    skip: $skip\n    take: $take\n    orderBy: $orderBy\n    where: {AND: $query}\n  ) {\n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      avatarUrl\n    }\n  }\n  total: main_aggregatePost(where: {AND: $query}) @transform(get: \"_count.id\") {\n    _count {\n      id\n    }\n  }\n}",
+		"enabled": true,
+		"createTime": "2023-03-29 03:42:25Z",
+		"updateTime": "2023-03-30 09:15:32Z",
+		"deleteTime": "",
 		"roleType": "",
-		"roles": "",
-		"title": "/Post/GetPostList",
-		"updateTime": ""
+		"roles": ""
 	},
 	{
 		"content": "mutation DeleteManyPost($ids: [Int]!) {\n  data: main_deleteManyPost(where: {id: {in: $ids}}) {\n    count\n  }\n}",
 		"createTime": "2023-03-29 03:42:25Z",
 		"deleteTime": "",
-		"enabled": false,
+		"enabled": true,
 		"id": 1520776050704384,
 		"illegal": false,
 		"isPublic": true,
@@ -140,11 +140,11 @@
 		"restUrl": "",
 		"roleType": "",
 		"roles": "",
-		"title": "/Post/DeleteManyPost",
-		"updateTime": ""
+		"title": "/Post/DeleteMany",
+		"updateTime": "2023-03-30 07:38:26Z"
 	},
 	{
-		"content": "mutation MyQuery($avatarUrl: String, $id: String!, $name: String!) @internalOperation {\n  data: main_createOneUser(data: {id: $id, name: $name, avatarUrl: $avatarUrl}) {\n    id\n  }\n}",
+		"content": "mutation MyQuery($avatarUrl: String, $id: String!, $name: String!, $role: String) @internalOperation {\n  data: main_createOneUser(\n    data: {id: $id, name: $name, avatarUrl: $avatarUrl, Role: {connect: {code: $role}}}\n  ) {\n    id\n  }\n}",
 		"createTime": "2023-03-29 09:36:47Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -159,7 +159,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/User/CreateOne",
-		"updateTime": "2023-03-29 09:39:04Z"
+		"updateTime": "2023-03-30 06:39:19Z"
 	},
 	{
 		"content": "query MyQuery($id: String!) @internalOperation {\n  data: main_findFirstUser(where: {id: {equals: $id}}) {\n    id\n  }\n}",
@@ -180,21 +180,39 @@
 		"updateTime": "2023-03-29 09:39:18Z"
 	},
 	{
-		"id": 1522203582332928,
-		"method": "GET",
-		"restUrl": "",
-		"operationType": "queries",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/User/Me",
-		"content": "query MyQuery($equals: String! @fromClaim(name: USERID)) {\n  data: main_findFirstUser(where: {id: {equals: $equals}}) {\n    name\n    id\n    avatarUrl\n  }\n}",
-		"enabled": true,
+		"content": "query MyQuery($equals: String! @fromClaim(name: USERID)) {\n  data: main_findFirstUser(where: {id: {equals: $equals}}) {\n    name\n    id\n    avatarUrl\n    roles: Role {\n      code\n    }\n  }\n}",
 		"createTime": "2023-03-29 09:45:28Z",
-		"updateTime": "2023-03-29 09:45:57Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 1522203582332928,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "",
-		"roles": ""
+		"roles": "",
+		"title": "/User/Me",
+		"updateTime": "2023-03-30 06:59:00Z"
+	},
+	{
+		"content": "query MyQuery {\n  data: main_aggregateUser {\n    count: _count {\n      id\n    }\n  }\n}",
+		"createTime": "2023-03-30 06:40:18Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1527137852391424,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]",
+		"title": "/User/CountUsers",
+		"updateTime": "2023-03-30 06:51:32Z"
 	}
 ]

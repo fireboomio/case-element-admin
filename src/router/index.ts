@@ -34,6 +34,12 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { title: 'dashboard', icon: 'homepage', affix: true }
       },
       {
+        path: 'post',
+        component: () => import('@/views/post/index.vue'),
+        name: 'Post',
+        meta: { title: '文章', icon: 'homepage', affix: true }
+      },
+      {
         path: '401',
         component: () => import('@/views/error-page/401.vue'),
         meta: { hidden: true }

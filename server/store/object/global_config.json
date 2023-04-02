@@ -3,7 +3,8 @@
   "authorizedRedirectUris": [
     "http://localhost:9123/#/workbench/userInfo",
     "http://localhost:9123/#/workbench/rapi/loginBack",
-    "http://localhost:3000/#/"
+    "http://localhost:3000/#/",
+    "http://localhost:3000/#/dashboard"
   ],
   "configureWunderGraphApplication": {
     "security": {
@@ -13,8 +14,10 @@
       "enableCSRF": true
     },
     "cors": {
-      "allowedOriginsEnabled": true,
-      "allowedOrigins": [],
+      "allowedOriginsEnabled": false,
+      "allowedOrigins": [
+        "http://localhost:3000"
+      ],
       "allowedMethods": [
         "GET",
         "POST"
