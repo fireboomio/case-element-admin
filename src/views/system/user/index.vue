@@ -158,6 +158,6 @@ onMounted(() => {
         @pagination="handleQuery"
       />
     </el-card>
-    <role-bind v-model="bindVisible" :user="bindUser" />
+    <role-bind v-model="bindVisible" :user="bindingUser" />
   </div>
 </template>

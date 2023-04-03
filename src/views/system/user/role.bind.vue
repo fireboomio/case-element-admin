@@ -34,37 +34,84 @@
 
 <script setup lang="ts">
 import api from '@/api';
-import type { Role } from '../types'
+import { PropType } from 'vue';
+import type { Role, User } from '../types';
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false
+  },
+  user: {
+    type: Object as PropType<User>,
+    required: true
   }
-})
-const emit = defineEmits(['update:modelValue'])
-const loading = ref(false)
-const roles = ref<Role[]>([])
-const selections = ref<string[]>([])
+});
+const emit = defineEmits(['update:modelValue']);
+const loading = ref(false);
+const roles = ref<Role[]>([]);
+const selections = ref<string[]>([]);
+let originRoles: string[] = []
 
-function handleSelectionChange(selections: string[]) {
-  console.log(selections)
+function handleSelectionChange(_selections: Role[]) {
+  selections.value = _selections.map(item => item.code!);
 }
 
 function close() {
-  emit('update:modelValue', false)
+  emit('update:modelValue', false);
+  loading.value = false
+  selections.value = []
+  originRoles = []
 }
 
-function onSubmit() {
-  close()
+async function onSubmit() {
+  loading.value = true;
+  // 先移除
+  for (const originRoleCode of originRoles) {
+    await api.mutate({
+      operationName: 'User/DisconnectRole',
+      input: {
+        userId: props.user.id!,
+        code: originRoleCode
+      }
+    })
+  }
+  // 再添加
+  for (const code of selections.value) {
+    await api.mutate({
+      operationName: 'User/ConnectRole',
+      input: {
+        userId: props.user.id!,
+        code
+      }
+    });
+  }
+  close();
 }
+
+watchEffect(async () => {
+  if (props.user?.id) {
+    loading.value = true;
+    const { error, data } = await api.query({
+      operationName: 'User/GetUserRole',
+      input: {
+        userId: props.user.id
+      }
+    })
+    if (!error) {
+      originRoles = data!.data!.Role?.map(item => item.code!) || [];
+      selections.value = originRoles
+    }
+    loading.value = false;
+  }
+})
 
 onMounted(async () => {
   const { error, data } = await api.query({
     operationName: 'Role/GetAll'
-  })
+  });
   if (!error) {
-    roles.value = data!.data!
+    roles.value = data!.data!;
   }
-})
+});
 </script>

@@ -324,22 +324,22 @@
 		"updateTime": "2023-04-03 09:22:09Z"
 	},
 	{
-		"id": 1550588367863808,
-		"method": "POST",
-		"restUrl": "",
-		"operationType": "mutations",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/User/DisconnectRole",
 		"content": "mutation MyQuery($userId: String!, $code: String!) {\n  data: main_updateOneUser(data: {Role: {disconnect: {code: $code}}}, where: {id: $userId}) {\n    id\n    name\n    createdAt\n    avatarUrl\n  }\n}",
-		"enabled": true,
 		"createTime": "2023-04-03 10:04:05Z",
-		"updateTime": "2023-04-03 10:08:42Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 1550588367863808,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "",
-		"roles": ""
+		"roles": "",
+		"title": "/User/DisconnectRole",
+		"updateTime": "2023-04-03 10:08:42Z"
 	},
 	{
 		"content": "mutation MyQuery($userId: String!, $code: String!) {\n  data: main_updateOneUser(data: {Role: {connect: {code: $code}}}, where: {id: $userId}) {\n    avatarUrl\n    createdAt\n    id\n    name\n  }\n}",
@@ -358,5 +358,23 @@
 		"roles": "",
 		"title": "/User/ConnectRole",
 		"updateTime": "2023-04-03 10:08:35Z"
+	},
+	{
+		"id": 1551869868703744,
+		"method": "GET",
+		"restUrl": "",
+		"operationType": "queries",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
+		"title": "/User/GetUserRole",
+		"content": "query MyQuery($userId: String!) {\n  data: main_findFirstUser(where: {id: {equals: $userId}}) {\n    Role {\n      code\n      remark\n    }\n  }\n}",
+		"enabled": true,
+		"createTime": "2023-04-03 15:29:59Z",
+		"updateTime": "2023-04-03 15:31:50Z",
+		"deleteTime": "",
+		"roleType": "",
+		"roles": ""
 	}
 ]

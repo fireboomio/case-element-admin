@@ -16,7 +16,7 @@ import {
 } from "fireboom-wundersdk/client";
 
 import type { CustomClaims, Role } from './claims'
-import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,Role__GetAllResponse,            Role__GetAllResponseData,Statistics__MonthlySalesResponse,            Statistics__MonthlySalesResponseData,Statistics__SaleTypePercentResponse,            Statistics__SaleTypePercentResponseData,Statistics__SalesTop10Response,            Statistics__SalesTop10ResponseData,Statistics__VisitTrendingResponse,            Statistics__VisitTrendingResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,User__ConnectRoleInput,User__ConnectRoleResponse,            User__ConnectRoleResponseData,User__CountUsersResponse,            User__CountUsersResponseData,User__CreateOneInput,User__CreateOneResponse,            User__CreateOneResponseData,User__DisconnectRoleInput,User__DisconnectRoleResponse,            User__DisconnectRoleResponseData,User__GetListInput,User__GetListResponse,            User__GetListResponseData,User__GetOneInput,User__GetOneResponse,            User__GetOneResponseData,User__MeResponse,            User__MeResponseData, } from './models'
+import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,Role__GetAllResponse,            Role__GetAllResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,User__ConnectRoleInput,User__ConnectRoleResponse,            User__ConnectRoleResponseData,User__CountUsersResponse,            User__CountUsersResponseData,User__CreateOneInput,User__CreateOneResponse,            User__CreateOneResponseData,User__DisconnectRoleInput,User__DisconnectRoleResponse,            User__DisconnectRoleResponseData,User__GetListInput,User__GetListResponse,            User__GetListResponseData,User__GetOneInput,User__GetOneResponse,            User__GetOneResponseData,User__GetUserRoleInput,User__GetUserRoleResponse,            User__GetUserRoleResponseData,User__MeResponse,            User__MeResponseData, } from './models'
 
 export const WUNDERGRAPH_S3_ENABLED = false
 export const WUNDERGRAPH_AUTH_ENABLED = true
@@ -32,7 +32,7 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-    applicationHash: "03d181d7",
+    applicationHash: "be55da72",
     baseURL: "http://localhost:9991",
     sdkVersion: "",
 }
@@ -66,22 +66,6 @@ export const operationMetadata: OperationMetadata = {
         requiresAuthentication: false
 		}
     ,
-    "Statistics/MonthlySales": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/SaleTypePercent": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/SalesTop10": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/VisitTrending": {
-        requiresAuthentication: false
-		}
-    ,
     "System/BindRoleApis": {
         requiresAuthentication: true
 		}
@@ -111,6 +95,10 @@ export const operationMetadata: OperationMetadata = {
 		}
     ,
     "User/GetOne": {
+        requiresAuthentication: false
+		}
+    ,
+    "User/GetUserRole": {
         requiresAuthentication: false
 		}
     ,
@@ -183,30 +171,6 @@ export type Queries = {
         requiresAuthentication: false
         
     }
-    'Statistics/MonthlySales': {
-        input?: undefined
-        data: Statistics__MonthlySalesResponseData
-        requiresAuthentication: false
-        
-    }
-    'Statistics/SaleTypePercent': {
-        input?: undefined
-        data: Statistics__SaleTypePercentResponseData
-        requiresAuthentication: false
-        
-    }
-    'Statistics/SalesTop10': {
-        input?: undefined
-        data: Statistics__SalesTop10ResponseData
-        requiresAuthentication: false
-        
-    }
-    'Statistics/VisitTrending': {
-        input?: undefined
-        data: Statistics__VisitTrendingResponseData
-        requiresAuthentication: false
-        
-    }
     'System/GetRoleBindApis': {
         input: System__GetRoleBindApisInput
         data: System__GetRoleBindApisResponseData
@@ -228,6 +192,12 @@ export type Queries = {
     'User/GetOne': {
         input: User__GetOneInput
         data: User__GetOneResponseData
+        requiresAuthentication: false
+        
+    }
+    'User/GetUserRole': {
+        input: User__GetUserRoleInput
+        data: User__GetUserRoleResponseData
         requiresAuthentication: false
         
     }
