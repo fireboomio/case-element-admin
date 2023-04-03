@@ -216,22 +216,22 @@
 		"updateTime": "2023-03-30 06:51:32Z"
 	},
 	{
-		"content": "query MyQuery {\n  data: statistics_GetMonthlySales {\n    months\n    totalSales\n  }\n}",
-		"createTime": "2023-04-02 15:23:41Z",
-		"deleteTime": "",
-		"enabled": true,
 		"id": 1546182777700352,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
 		"method": "GET",
-		"operationType": "queries",
-		"remark": "",
 		"restUrl": "",
-		"roleType": "",
-		"roles": "",
+		"operationType": "queries",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
 		"title": "/Statistics/MonthlySales",
-		"updateTime": "2023-04-02 15:24:28Z"
+		"content": "query MyQuery {\n  data: statistics_GetMonthlySales {\n    months\n    totalSales\n  }\n} ",
+		"enabled": true,
+		"createTime": "2023-04-02 15:23:41Z",
+		"updateTime": "2023-04-03 06:36:14Z",
+		"deleteTime": "",
+		"roleType": "",
+		"roles": ""
 	},
 	{
 		"content": "query MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n}",
@@ -270,21 +270,21 @@
 		"updateTime": "2023-04-02 15:25:53Z"
 	},
 	{
-		"id": 1546192569499648,
-		"method": "GET",
-		"restUrl": "",
-		"operationType": "queries",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/Statistics/SaleTypePercent",
 		"content": "query MyQuery {\n  data: statistics_GetSaleTypePercent {\n    typeId\n    typeName\n    totalSales\n  }\n}",
-		"enabled": true,
 		"createTime": "2023-04-02 15:26:10Z",
-		"updateTime": "2023-04-02 15:44:53Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 1546192569499648,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "",
-		"roles": ""
+		"roles": "",
+		"title": "/Statistics/SaleTypePercent",
+		"updateTime": "2023-04-02 15:44:53Z"
 	}
 ]

@@ -18,7 +18,7 @@ export default new GraphQLSchema({
                 },
             })),
             resolve() {
-                return prisma.main.queryRaw(`SELECT DATE_FORMAT(visitedAt,'%Y%m%d') days, COUNT(id) count from VisitLog where visitedAt BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY days`, {});
+                return prisma.main.queryRaw(`SELECT date(visitedAt) days, COUNT(id) count from VisitLog where visitedAt BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY days`, {});
             },
         },
         GetMonthlySales: {
@@ -34,7 +34,7 @@ export default new GraphQLSchema({
                 },
             })),
             resolve() {
-                return prisma.main.queryRaw(`SELECT DATE_FORMAT(day,'%Y%m') months, SUM(sales) totalSales from SaleLog where day BETWEEN '2019-10-01' AND '2020-09-30' GROUP BY months`, {});
+                return prisma.main.queryRaw(`SELECT date(day) months, SUM(sales) totalSales from SaleLog where day BETWEEN '2019-10-01' AND '2020-09-30' GROUP BY months`, {});
             },
         },
         GetSalesTop10: {

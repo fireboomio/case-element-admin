@@ -40,6 +40,7 @@ onMounted(async () => {
   height: 18px;
   background-color: #666;
   color: #fff;
+  font-size: 12px;
 }
 .highlight {
   background-color: #314659;

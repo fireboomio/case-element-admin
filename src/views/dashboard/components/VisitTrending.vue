@@ -35,45 +35,40 @@ onMounted(async () => {
   if (!error) {
     chartRef.value.setOption({
       tooltip: {
-        trigger: 'item'
+        trigger: 'axis'
       },
-      legend: {
-        top: '5%',
-        left: 'center'
+      grid: {
+        left: 40,
+        top: 20,
+        bottom: 20,
+        right: 20
       },
-      series: [
-        {
-          type: 'pie',
-          radius: ['40%', '70%'],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: '#fff',
-            borderWidth: 2
-          },
-          label: {
-            show: false,
-            position: 'center'
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: 40,
-              fontWeight: 'bold'
-            }
-          },
-          labelLine: {
-            show: false
-          },
-          data: data!.data!.map(item => item.count) ?? []
-        }
-      ],
       xAxis: {
+        type: 'category',
         data: data!.data!.map(item => item.days) ?? []
       },
       yAxis: {
         type: 'value'
-      }
+      },
+      series: [
+        {
+          data: data!.data!.map(item => item.count) ?? [],
+          type: 'line',
+          smooth: true,
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(58,77,233,0.8)'
+              },
+              {
+                offset: 1,
+                color: 'rgba(58,77,233,0.3)'
+              }
+            ])
+          }
+        }
+      ]
     });
   }
 });
