@@ -16,7 +16,13 @@ const whiteList = ['/login'];
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
   const userStore = useUserStoreHook();
-  await userStore.init()
+  const routes = await userStore.init()
+  // 添加异步路由
+  if (routes) {
+    for(const route of routes) {
+      router.addRoute(route)
+    }
+  }
   try {
     if (whiteList.indexOf(to.path) !== -1) {
       if (userStore.nickname && to.path === '/login') {

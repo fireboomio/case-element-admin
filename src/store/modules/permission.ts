@@ -95,32 +95,111 @@ export const usePermissionStore = defineStore('permission', () => {
       //   .catch(error => {
       //     reject(error);
       //   });
-      resolve([
+      const routes: RouteRecordRaw[] = [
         {
-          path: '/post',
-          name: 'post',
-          component: Layout,
-          children: [
+          "path": "/content",
+          "component": "Layout",
+          "meta": {
+            "title": "内容管理",
+            "icon": "api",
+            "hidden": false,
+            "roles": [
+              "admin"
+            ],
+            "keepAlive": true
+          },
+          "children": [
             {
-              path: '/',
-              name: 'postList',
-              component: () => import('@/views/post/index.vue'),
-              meta: {
-                title: '文章管理',
-                icon: 'api',
-                hidden: false,
-                roles: ['admin'],
+              "path": "post",
+              "component": "post/index",
+              "name": "postList",
+              "meta": {
+                "title": "文章列表",
+                "icon": "api",
+                "hidden": false,
+                "roles": [
+                  "admin"
+                ],
+                "keepAlive": true
               }
             }
-          ],
+          ]
+        },
+        {
+          path: '/system',
+          component: 'Layout',
           meta: {
-            title: '文章',
+            title: '系统管理',
             icon: 'api',
             hidden: false,
-            roles: ['admin'],
-          }
+            roles: [
+              'admin'
+            ],
+            keepAlive: true
+          },
+          children: [
+            {
+              "path": "user",
+              "component": "system/user/index",
+              "name": "userList",
+              "meta": {
+                "title": "用户列表",
+                "icon": "api",
+                "hidden": false,
+                "roles": [
+                  "admin"
+                ],
+                "keepAlive": true
+              }
+            },
+            {
+              "path": "role",
+              "component": "system/role/index",
+              "name": "roleList",
+              "meta": {
+                "title": "角色列表",
+                "icon": "api",
+                "hidden": false,
+                "roles": [
+                  "admin"
+                ],
+                "keepAlive": true
+              }
+            },
+            {
+              "path": "menu",
+              "component": "system/menu/index",
+              "name": "menuList",
+              "meta": {
+                "title": "菜单列表",
+                "icon": "api",
+                "hidden": false,
+                "roles": [
+                  "admin"
+                ],
+                "keepAlive": true
+              }
+            },
+            {
+              "path": "dict",
+              "component": "system/dict/index",
+              "name": "dictList",
+              "meta": {
+                "title": "字典表",
+                "icon": "api",
+                "hidden": false,
+                "roles": [
+                  "admin"
+                ],
+                "keepAlive": true
+              }
+            }
+          ]
         }
-      ])
+      ]
+      const filteredRoutes = filterAsyncRoutes(routes, roles);
+      setRoutes(filteredRoutes);
+      resolve(filteredRoutes);
     });
   }
   return { routes, setRoutes, generateRoutes };

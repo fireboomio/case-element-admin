@@ -4,8 +4,11 @@ import { store } from '@/store';
 
 import { useStorage } from '@vueuse/core';
 import api from '@/api';
+import { usePermissionStore } from './permission';
+
 
 export const useUserStore = defineStore('user', () => {
+  const permissionStore = usePermissionStore()
   // state
   const token = useStorage('accessToken', '');
   // 是否初始化获取过用户信息
@@ -14,10 +17,15 @@ export const useUserStore = defineStore('user', () => {
   const avatar = ref('');
   const roles = ref<Array<string>>([]); // 用户角色编码集合 → 判断路由权限
   const perms = ref<Array<string>>([]); // 用户权限编码集合 → 判断按钮权限
+  /**
+   * 初始化
+   */
   async function init() {
     if (!inited.value) {
       await getInfo()
+      const routes = await permissionStore.generateRoutes(roles.value)
       inited.value = true
+      return routes
     }
   }
   /**

@@ -6,18 +6,18 @@ export interface Post__CreateOneInput {
             
 }
 export interface InternalPost__CreateOneInput {
+      content?: string
+      poster?: string
       publishedAt?: string
       title: string
       userId?: string
-      content?: string
-      poster?: string
 }
 export interface InjectedPost__CreateOneInput {
-     poster?: string
-         publishedAt?: string
+     publishedAt?: string
          title: string
          userId: string
          content?: string
+         poster?: string
     
 }
 
@@ -29,16 +29,16 @@ export interface Post__CreateOneResponse {
 }
 export interface Post__CreateOneResponseData {
     data?: {
-      User?: {
-          name?: string
-          avatarUrl?: string
-          id?: string
-      },
-        authorId?: string
         id?: number
         poster?: string
         publishedAt?: string
         title?: string
+      User?: {
+          id?: string
+          name?: string
+          avatarUrl?: string
+      },
+        authorId?: string
     },
 }export interface Post__DeleteManyInput {
    ids: {
@@ -100,189 +100,41 @@ export interface InternalPost__GetListInput {
       skip?: number
       take?: number
 }
-export interface main_RoleWhereInput {
-                           OR?: {
-   }[],
-                                                                        
-}
-export interface main_StringFilter {
-     contains?: string
-                 equals?: string
-                 gt?: string
-                 gte?: string
-               in?: {
-   }[],
-                 lte?: string
-                 endsWith?: string
-                 lt?: string
-                           notIn?: {
-   }[],
-                 startsWith?: string
-            
-}
-export interface main_UserOrderByWithRelationInput {
-                             avatarUrl?: string
-                 createdAt?: string
-                 id?: string
-                 name?: string
-            
-}
-export interface main_MenuListRelationFilter {
-                                    
-}
-export interface main_MenuRelationFilter {
-                        
-}
 export interface main_PostOrderByRelationAggregateInput {
      _count?: string
             
-}
-export interface main_StringNullableFilter {
-               notIn?: {
-   }[],
-                 contains?: string
-                 gt?: string
-                 gte?: string
-               in?: {
-   }[],
-                 lt?: string
-                 lte?: string
-                 startsWith?: string
-                 endsWith?: string
-                 equals?: string
-            
-}
-export interface main_UserListRelationFilter {
-                                    
-}
-export interface main_UserRelationFilter {
-                        
-}
-export interface main_UserWhereInput {
-               OR?: {
-   }[],
-                                                                                                
-}
-export interface main_DateTimeFilter {
-     gte?: string
-               in?: {
-   }[],
-                 lt?: string
-                 lte?: string
-                           notIn?: {
-   }[],
-                 equals?: string
-                 gt?: string
-            
-}
-export interface main_PostListRelationFilter {
-                                    
 }
 export interface main_RoleOrderByRelationAggregateInput {
      _count?: string
             
 }
-export interface main_NestedIntFilter {
-     gte?: number
-               in?: {
+export interface main_RoleWhereInput {
+                                                                           OR?: {
    }[],
-                 lt?: number
-                 lte?: number
-                           notIn?: {
-   }[],
-                 equals?: number
-                 gt?: number
-            
-}
-export interface main_NestedIntNullableFilter {
-   notIn?: {
-   }[],
-                 equals?: number
-                 gt?: number
-                 gte?: number
-               in?: {
-   }[],
-                 lt?: number
-                 lte?: number
                         
 }
-export interface main_NestedStringNullableFilter {
-     contains?: string
-                 endsWith?: string
-                 gte?: string
-               in?: {
-   }[],
-                 lte?: string
-                 equals?: string
-                 gt?: string
-                 lt?: string
-                           notIn?: {
-   }[],
-                 startsWith?: string
-            
-}
-export interface main_PostOrderByWithRelationInput {
-     content?: string
-                 id?: string
-                 poster?: string
-                 publishedAt?: string
-                 title?: string
-                             authorId?: string
-            
-}
-export interface main_PostWhereInput {
-               OR?: {
-   }[],
-                                                                                                            
-}
-export interface main_DateTimeNullableFilter {
-   notIn?: {
-   }[],
-                 equals?: string
-                 gt?: string
-                 gte?: string
-               in?: {
-   }[],
-                 lt?: string
-                 lte?: string
+export interface main_UserRelationFilter {
                         
 }
-export interface main_MenuWhereInput {
-                                                                                                                                                   OR?: {
-   }[],
-            
-}
-export interface main_NestedDateTimeNullableFilter {
-     lte?: string
-                           notIn?: {
-   }[],
-                 equals?: string
-                 gt?: string
-                 gte?: string
-               in?: {
-   }[],
-                 lt?: string
-            
-}
-export interface main_RoleListRelationFilter {
-                                    
+export interface main_MenuRelationFilter {
+                        
 }
 export interface main_NestedStringFilter {
-     gt?: string
-                 lt?: string
-                 lte?: string
-                           in?: {
+     lt?: string
+                             gte?: string
+               in?: {
    }[],
+                 lte?: string
                notIn?: {
    }[],
-                 startsWith?: string
                  contains?: string
                  endsWith?: string
                  equals?: string
-                 gte?: string
+                 gt?: string
+                 startsWith?: string
             
 }
-export interface main_IntFilter {
+export interface main_IntNullableFilter {
      equals?: number
                  gt?: number
                  gte?: number
@@ -294,9 +146,50 @@ export interface main_IntFilter {
    }[],
             
 }
-export interface main_IntNullableFilter {
-     gt?: number
-                 gte?: number
+export interface main_StringFilter {
+     gt?: string
+                 gte?: string
+                 lt?: string
+                 lte?: string
+                 startsWith?: string
+                 contains?: string
+                 endsWith?: string
+                           notIn?: {
+   }[],
+                 equals?: string
+               in?: {
+   }[],
+            
+}
+export interface main_StringNullableFilter {
+     lte?: string
+                           notIn?: {
+   }[],
+                 startsWith?: string
+                 endsWith?: string
+                 equals?: string
+               in?: {
+   }[],
+                 lt?: string
+                 contains?: string
+                 gt?: string
+                 gte?: string
+            
+}
+export interface main_DateTimeFilter {
+               notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lt?: string
+                 lte?: string
+            
+}
+export interface main_IntFilter {
+     gte?: number
                in?: {
    }[],
                  lt?: number
@@ -304,26 +197,133 @@ export interface main_IntNullableFilter {
                            notIn?: {
    }[],
                  equals?: number
+                 gt?: number
             
 }
-export interface main_NestedDateTimeFilter {
-     gt?: string
+export interface main_NestedDateTimeNullableFilter {
+     lt?: string
+                 lte?: string
+                           notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
+                 gte?: string
+               in?: {
+   }[],
+            
+}
+export interface main_NestedIntFilter {
+     lte?: number
+                           notIn?: {
+   }[],
+                 equals?: number
+                 gt?: number
+                 gte?: number
+               in?: {
+   }[],
+                 lt?: number
+            
+}
+export interface main_PostOrderByWithRelationInput {
+     content?: string
+                 id?: string
+                 poster?: string
+                 publishedAt?: string
+                 title?: string
+                             authorId?: string
+            
+}
+export interface main_RoleListRelationFilter {
+                                    
+}
+export interface main_UserWhereInput {
+                                                               OR?: {
+   }[],
+                                                
+}
+export interface main_DateTimeNullableFilter {
+               notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
                  gte?: string
                in?: {
    }[],
                  lt?: string
                  lte?: string
+            
+}
+export interface main_MenuListRelationFilter {
+                                    
+}
+export interface main_NestedIntNullableFilter {
+     lte?: number
+                           notIn?: {
+   }[],
+                 equals?: number
+                 gt?: number
+                 gte?: number
+               in?: {
+   }[],
+                 lt?: number
+            
+}
+export interface main_NestedStringNullableFilter {
+     equals?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lt?: string
+                 endsWith?: string
+                 gt?: string
+                 lte?: string
+                           notIn?: {
+   }[],
+                 startsWith?: string
+                 contains?: string
+            
+}
+export interface main_PostListRelationFilter {
+                                    
+}
+export interface main_PostWhereInput {
+                                       OR?: {
+   }[],
+                                                                                    
+}
+export interface main_UserListRelationFilter {
+                                    
+}
+export interface main_UserOrderByWithRelationInput {
+                 avatarUrl?: string
+                 createdAt?: string
+                 id?: string
+                 name?: string
+                        
+}
+export interface main_MenuWhereInput {
+   OR?: {
+   }[],
+                                                                                                                                                            
+}
+export interface main_NestedDateTimeFilter {
+     lte?: string
                            notIn?: {
    }[],
                  equals?: string
+                 gt?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lt?: string
             
 }
 export interface InjectedPost__GetListInput {
-     skip?: number
+         skip?: number
          take?: number
        orderBy?: {
    }[],
-        
+    
 }
 
 
@@ -334,16 +334,16 @@ export interface Post__GetListResponse {
 }
 export interface Post__GetListResponseData {
     data?: {
+      User?: {
+          avatarUrl?: string
+          name?: string
+      },
+        authorId?: string
+        content?: string
         id?: number
         poster?: string
         publishedAt?: string
         title?: string
-      User?: {
-          name?: string
-          avatarUrl?: string
-      },
-        authorId?: string
-        content?: string
     }[],
       total?: number
 }export interface Post__GetOneInput {
@@ -379,26 +379,26 @@ export interface Post__GetOneResponseData {
         content?: string
     },
 }export interface Post__UpdateOneInput {
-     title?: string
-                 content?: string
+     content?: string
                  id: number
                  poster?: string
                  publishedAt?: string
+                 title?: string
             
 }
 export interface InternalPost__UpdateOneInput {
-      content?: string
       id: number
       poster?: string
       publishedAt?: string
       title?: string
+      content?: string
 }
 export interface InjectedPost__UpdateOneInput {
-     title?: string
-         content?: string
+     content?: string
          id: number
          poster?: string
          publishedAt?: string
+         title?: string
     
 }
 
@@ -410,18 +410,30 @@ export interface Post__UpdateOneResponse {
 }
 export interface Post__UpdateOneResponseData {
     data?: {
+        publishedAt?: string
+        title?: string
       User?: {
-          name?: string
           avatarUrl?: string
           id?: string
+          name?: string
       },
         authorId?: string
         content?: string
         id?: number
         poster?: string
-        publishedAt?: string
-        title?: string
     },
+}
+
+    
+export interface Role__GetAllResponse {
+    data?: Role__GetAllResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface Role__GetAllResponseData {
+    data?: {
+        code?: string
+        remark?: string
+    }[],
 }
 
     
@@ -465,15 +477,15 @@ export interface Statistics__VisitTrendingResponse {
 }
 export interface Statistics__VisitTrendingResponseData {
     data?: {
-        days?: string
         count?: number
+        days?: string
     }[],
 }export interface System__BindRoleApisInput {
-     roleCode: string
-               allRoles: {
+   allRoles: {
    }[],
                apis: {
    }[],
+                 roleCode: string
             
 }
 export interface InternalSystem__BindRoleApisInput {
@@ -484,11 +496,11 @@ export interface InternalSystem__BindRoleApisInput {
       roleCode: string
 }
 export interface InjectedSystem__BindRoleApisInput {
-     roleCode: string
-       allRoles: {
+   allRoles: {
    }[],
        apis: {
    }[],
+         roleCode: string
     
 }
 
@@ -522,19 +534,47 @@ export interface System__GetRoleBindApisResponse {
 }
 export interface System__GetRoleBindApisResponseData {
     data?: {
-        content?: string
-        operationType?: string
-        roles?: string
         id?: number
-        restUrl?: string
+        operationType?: string
         remark?: string
         title?: string
-        updateTime?: string
         createTime?: string
+        roles?: string
+        roleType?: string
+        updateTime?: string
+        content?: string
         deleteTime?: string
         method?: string
-        roleType?: string
+        restUrl?: string
     }[],
+}export interface User__ConnectRoleInput {
+     userId: string
+                 code: string
+            
+}
+export interface InternalUser__ConnectRoleInput {
+      code: string
+      userId: string
+}
+export interface InjectedUser__ConnectRoleInput {
+     code: string
+         userId: string
+    
+}
+
+
+    
+export interface User__ConnectRoleResponse {
+    data?: User__ConnectRoleResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface User__ConnectRoleResponseData {
+    data?: {
+        avatarUrl?: string
+        createdAt?: string
+        id?: string
+        name?: string
+    },
 }
 
     
@@ -549,23 +589,23 @@ export interface User__CountUsersResponseData {
       },
     },
 }export interface User__CreateOneInput {
-     role?: string
-                 avatarUrl?: string
+     avatarUrl?: string
                  id: string
                  name: string
+                 role?: string
             
 }
 export interface InternalUser__CreateOneInput {
-      name: string
-      role?: string
       avatarUrl?: string
       id: string
+      name: string
+      role?: string
 }
 export interface InjectedUser__CreateOneInput {
-     avatarUrl?: string
-         id: string
+     id: string
          name: string
          role?: string
+         avatarUrl?: string
     
 }
 
@@ -579,6 +619,278 @@ export interface User__CreateOneResponseData {
     data?: {
         id?: string
     },
+}export interface User__DisconnectRoleInput {
+     code: string
+                 userId: string
+            
+}
+export interface InternalUser__DisconnectRoleInput {
+      userId: string
+      code: string
+}
+export interface InjectedUser__DisconnectRoleInput {
+     code: string
+         userId: string
+    
+}
+
+
+    
+export interface User__DisconnectRoleResponse {
+    data?: User__DisconnectRoleResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface User__DisconnectRoleResponseData {
+    data?: {
+        avatarUrl?: string
+        createdAt?: string
+        id?: string
+        name?: string
+    },
+}export interface User__GetListInput {
+   orderBy?: {
+   }[],
+                             skip: number
+                 take: number
+            
+}
+export interface InternalUser__GetListInput {
+      skip: number
+      take: number
+    orderBy?: {
+    }[],
+}
+export interface main_DateTimeFilter {
+               notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lt?: string
+                 lte?: string
+            
+}
+export interface main_IntNullableFilter {
+   in?: {
+   }[],
+                 lt?: number
+                 lte?: number
+                           notIn?: {
+   }[],
+                 equals?: number
+                 gt?: number
+                 gte?: number
+            
+}
+export interface main_MenuWhereInput {
+                                                                                                   OR?: {
+   }[],
+                                                            
+}
+export interface main_NestedDateTimeNullableFilter {
+     lt?: string
+                 lte?: string
+                           notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
+                 gte?: string
+               in?: {
+   }[],
+            
+}
+export interface main_PostOrderByRelationAggregateInput {
+     _count?: string
+            
+}
+export interface main_StringNullableFilter {
+               notIn?: {
+   }[],
+                 startsWith?: string
+                 endsWith?: string
+                 equals?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lt?: string
+                 contains?: string
+                 gt?: string
+                 lte?: string
+            
+}
+export interface main_MenuListRelationFilter {
+                                    
+}
+export interface main_NestedStringFilter {
+     contains?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lte?: string
+               notIn?: {
+   }[],
+                 startsWith?: string
+                 endsWith?: string
+                 equals?: string
+                 gt?: string
+                 lt?: string
+                        
+}
+export interface main_StringFilter {
+     contains?: string
+                 endsWith?: string
+                 gt?: string
+                 startsWith?: string
+                           notIn?: {
+   }[],
+                 equals?: string
+                 gte?: string
+               in?: {
+   }[],
+                 lt?: string
+                 lte?: string
+            
+}
+export interface main_UserListRelationFilter {
+                                    
+}
+export interface main_UserRelationFilter {
+                        
+}
+export interface main_NestedDateTimeFilter {
+     gte?: string
+               in?: {
+   }[],
+                 lt?: string
+                 lte?: string
+                           notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
+            
+}
+export interface main_NestedIntFilter {
+     gte?: number
+               in?: {
+   }[],
+                 lt?: number
+                 lte?: number
+                           notIn?: {
+   }[],
+                 equals?: number
+                 gt?: number
+            
+}
+export interface main_NestedIntNullableFilter {
+               notIn?: {
+   }[],
+                 equals?: number
+                 gt?: number
+                 gte?: number
+               in?: {
+   }[],
+                 lt?: number
+                 lte?: number
+            
+}
+export interface main_NestedStringNullableFilter {
+     equals?: string
+                 lt?: string
+                 lte?: string
+               notIn?: {
+   }[],
+                 contains?: string
+                 endsWith?: string
+                 gt?: string
+                 gte?: string
+               in?: {
+   }[],
+                             startsWith?: string
+            
+}
+export interface main_PostWhereInput {
+   OR?: {
+   }[],
+                                                                                                                        
+}
+export interface main_RoleListRelationFilter {
+                                    
+}
+export interface main_RoleWhereInput {
+                                       OR?: {
+   }[],
+                                                            
+}
+export interface main_UserWhereInput {
+                                                                           OR?: {
+   }[],
+                                    
+}
+export interface main_DateTimeNullableFilter {
+   in?: {
+   }[],
+                 lt?: string
+                 lte?: string
+                           notIn?: {
+   }[],
+                 equals?: string
+                 gt?: string
+                 gte?: string
+            
+}
+export interface main_IntFilter {
+   in?: {
+   }[],
+                 lt?: number
+                 lte?: number
+                           notIn?: {
+   }[],
+                 equals?: number
+                 gt?: number
+                 gte?: number
+            
+}
+export interface main_MenuRelationFilter {
+                        
+}
+export interface main_PostListRelationFilter {
+                                    
+}
+export interface main_RoleOrderByRelationAggregateInput {
+     _count?: string
+            
+}
+export interface main_UserOrderByWithRelationInput {
+                             avatarUrl?: string
+                 createdAt?: string
+                 id?: string
+                 name?: string
+            
+}
+export interface InjectedUser__GetListInput {
+   orderBy?: {
+   }[],
+             skip: number
+         take: number
+    
+}
+
+
+    
+export interface User__GetListResponse {
+    data?: User__GetListResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface User__GetListResponseData {
+    data?: {
+        avatarUrl?: string
+        createdAt?: string
+        id?: string
+        name?: string
+    }[],
+      total?: number
 }export interface User__GetOneInput {
      id: string
             

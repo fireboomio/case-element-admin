@@ -10,31 +10,57 @@
     }
   ],
   "paths": {
-    "/api/v1/role/apis": {
+    "/api/v1/role/all": {
       "get": {
-        "operationId": "getRoleBindApis",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "required": [
-                  "code"
-                ],
-                "type": "object",
-                "properties": {
-                  "code": {
-                    "type": "string"
-                  },
-                  "roleType": {
-                    "type": "string",
-                    "default": "requireMatchAny",
-                    "enum": ["requireMatchAll", "requireMatchAny", "denyMatchAll", "denyMatchAny"]
+        "operationId": "getAllRoles",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "remark": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/api/v1/role/apis": {
+      "get": {
+        "operationId": "getRoleBindApis",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "requireMatchAny",
+              "enum": ["requireMatchAll", "requireMatchAny", "denyMatchAll", "denyMatchAny"]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
