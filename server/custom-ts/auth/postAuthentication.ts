@@ -4,7 +4,7 @@ export default async function postAuthentication(hook: AuthenticationHookRequest
   if (hook.user) {
     const { providerId, userId } = hook.user
     const { picture, name } = hook.user.idToken!
-    const resp = await hook.internalClient.queries.User__GetOne({
+    const resp = await hook.internalClient.queries.System__User__GetOne({
       input: {
         id: userId,
       },
@@ -12,8 +12,8 @@ export default async function postAuthentication(hook: AuthenticationHookRequest
     if (!resp.error) {
       const existedUser = resp.data!.data
       if (!existedUser) {
-        const userCount = await hook.internalClient.queries.User__CountUsers({})
-        const rest = await hook.internalClient.mutations.User__CreateOne({
+        const userCount = await hook.internalClient.queries.System__User__CountUsers({})
+        const rest = await hook.internalClient.mutations.System__User__CreateOne({
           input: {
             name: name as string,
             id: userId!,

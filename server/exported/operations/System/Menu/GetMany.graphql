@@ -1,0 +1,12 @@
+query GetManyMenu {
+  data: main_findManyMenu {
+    
+    id
+    parentId
+    label
+    path
+    icon
+    sort
+    level
+  }
+}

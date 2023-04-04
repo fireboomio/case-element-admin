@@ -43,8 +43,7 @@ const props = defineProps({
     default: false
   },
   user: {
-    type: Object as PropType<User>,
-    required: true
+    type: Object as PropType<User>
   }
 });
 const emit = defineEmits(['update:modelValue']);
@@ -69,9 +68,9 @@ async function onSubmit() {
   // 先移除
   for (const originRoleCode of originRoles) {
     await api.mutate({
-      operationName: 'User/DisconnectRole',
+      operationName: 'System/User/DisconnectRole',
       input: {
-        userId: props.user.id!,
+        userId: props.user!.id!,
         code: originRoleCode
       }
     })
@@ -79,9 +78,9 @@ async function onSubmit() {
   // 再添加
   for (const code of selections.value) {
     await api.mutate({
-      operationName: 'User/ConnectRole',
+      operationName: 'System/User/ConnectRole',
       input: {
-        userId: props.user.id!,
+        userId: props.user!.id!,
         code
       }
     });
@@ -93,9 +92,9 @@ watchEffect(async () => {
   if (props.user?.id) {
     loading.value = true;
     const { error, data } = await api.query({
-      operationName: 'User/GetUserRole',
+      operationName: 'System/User/GetUserRole',
       input: {
-        userId: props.user.id
+        userId: props.user!.id
       }
     })
     if (!error) {
@@ -108,7 +107,7 @@ watchEffect(async () => {
 
 onMounted(async () => {
   const { error, data } = await api.query({
-    operationName: 'Role/GetAll'
+    operationName: 'System/Role/GetMany'
   });
   if (!error) {
     roles.value = data!.data!;

@@ -5,18 +5,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  getRolePage,
-  updateRole,
-  getRoleForm,
-  addRole,
-  deleteRoles,
-  getRoleMenuIds,
-  updateRoleMenus
-} from '@/api/role';
-import { listMenuOptions } from '@/api/menu';
-
-import { RolePageVO, RoleForm, RoleQuery } from '@/api/role/types';
+import api, { convertPageQuery } from '@/api';
+import { merge } from '@/utils';
+import {  FormRules } from 'element-plus';
+import { Role } from '../types';
 
 const queryFormRef = ref(ElForm);
 const roleFormRef = ref(ElForm);
@@ -26,34 +18,26 @@ const loading = ref(false);
 const ids = ref<number[]>([]);
 const total = ref(0);
 
-const queryParams = reactive<RoleQuery>({
+const queryParams = reactive<PageQuery>({
   pageNum: 1,
   pageSize: 10
 });
 
-const roleList = ref<RolePageVO[]>();
+const roleList = ref<Role[]>();
 
 const dialog = reactive<DialogOption>({
   visible: false
 });
 
-const formData = reactive<RoleForm>({
-  sort: 1,
-  status: 1,
+const formData = reactive<Required<Omit<Role, 'id'>>>({
   code: '',
-  name: ''
+  remark: ''
 });
+const editingId = ref<number>();
 
-const rules = reactive({
-  name: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
-  code: [{ required: true, message: '请输入角色编码', trigger: 'blur' }],
-  dataScope: [{ required: true, message: '请选择数据权限', trigger: 'blur' }],
-  status: [{ required: true, message: '请选择状态', trigger: 'blur' }]
+const rules = reactive<FormRules>({
+  code: [{ required: true, message: '请输入角色编码', trigger: 'blur' }]
 });
-
-const menuDialogVisible = ref(false);
-
-const menuList = ref<OptionType[]>([]);
 
 interface CheckedRole {
   id?: number;
@@ -64,16 +48,17 @@ let checkedRole: CheckedRole = reactive({});
 /**
  * 查询
  */
-function handleQuery() {
+async function handleQuery() {
   loading.value = true;
-  getRolePage(queryParams)
-    .then(({ data }) => {
-      roleList.value = data.list;
-      total.value = data.total;
-    })
-    .finally(() => {
-      loading.value = false;
-    });
+  const { error, data } = await api.query({
+    operationName: 'System/Role/GetList',
+    input: convertPageQuery(queryParams, { containsFields: ['code', 'remark'] })
+  });
+  if (!error) {
+    roleList.value = data!.data!;
+    total.value = data!.total!;
+  }
+  loading.value = false;
 }
 /**
  * 重置查询
@@ -93,16 +78,13 @@ function handleSelectionChange(selection: any) {
 
 /**
  * 打开角色表单弹窗
- *
- * @param roleId
  */
-function openDialog(roleId?: number) {
+function openDialog(role?: Role) {
   dialog.visible = true;
-  if (roleId) {
+  if (role) {
     dialog.title = '修改角色';
-    getRoleForm(roleId).then(({ data }) => {
-      Object.assign(formData, data);
-    });
+    merge(formData, role);
+    editingId.value = role.id;
   } else {
     dialog.title = '新增角色';
   }
@@ -111,28 +93,37 @@ function openDialog(roleId?: number) {
 /**
  * 角色表单提交
  */
-function handleSubmit() {
+async function handleSubmit() {
   loading.value = true;
-  roleFormRef.value.validate((valid: any) => {
+  roleFormRef.value.validate(async (valid: any) => {
     if (valid) {
-      const roleId = formData.id;
-      if (roleId) {
-        updateRole(roleId, formData)
-          .then(() => {
-            ElMessage.success('修改成功');
-            closeDialog();
-            resetQuery();
-          })
-          .finally(() => (loading.value = false));
+      if (editingId.value) {
+        const { error } = await api.mutate({
+          operationName: 'System/Role/UpdateOne',
+          input: {
+            id: editingId.value,
+            remark: formData.remark
+          }
+        });
+        if (!error) {
+          ElMessage.success('修改成功');
+          closeDialog();
+          resetQuery();
+        }
       } else {
-        addRole(formData)
-          .then(() => {
-            ElMessage.success('新增成功');
-            closeDialog();
-            resetQuery();
-          })
-          .finally(() => (loading.value = false));
+        const { error } = await api.mutate({
+          operationName: 'System/Role/AddOne',
+          input: {
+            ...formData
+          }
+        });
+        if (!error) {
+          ElMessage.success('新增成功');
+          closeDialog();
+          resetQuery();
+        }
       }
+      loading.value = false;
     }
   });
 }
@@ -152,16 +143,15 @@ function resetForm() {
   roleFormRef.value.resetFields();
   roleFormRef.value.clearValidate();
 
-  formData.id = undefined;
-  formData.sort = 1;
-  formData.status = 1;
+  formData.code = '';
+  formData.remark = '';
 }
 
 /**
  * 删除
  */
 function handleDelete(roleId?: number) {
-  const roleIds = [roleId || ids.value].join(',');
+  const roleIds = roleId ? [roleId] : ids;
   if (!roleIds) {
     ElMessage.warning('请勾选删除项');
     return;
@@ -171,21 +161,25 @@ function handleDelete(roleId?: number) {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
-  }).then(() => {
+  }).then(async () => {
     loading.value = true;
-    deleteRoles(roleIds)
-      .then(() => {
-        ElMessage.success('删除成功');
-        resetQuery();
-      })
-      .finally(() => (loading.value = false));
+    const { error } = await api.mutate({
+      operationName: 'System/Role/DeleteMany',
+      // @ts-ignore
+      input: { ids: roleIds }
+    });
+    if (!error) {
+      ElMessage.success('删除成功');
+      resetQuery();
+    }
+    loading.value = false;
   });
 }
 
 /**
  * 打开分配菜单弹窗
  */
-function openMenuDialog(row: RolePageVO) {
+function openMenuDialog(row: Role) {
   const roleId = row.id;
   if (roleId) {
     checkedRole = {
@@ -246,10 +240,10 @@ onMounted(() => {
   <div class="app-container">
     <div class="search">
       <el-form ref="queryFormRef" :model="queryParams" :inline="true">
-        <el-form-item prop="keywords" label="关键字">
+        <el-form-item prop="code" label="编码">
           <el-input
-            v-model="queryParams.keywords"
-            placeholder="角色名称"
+            v-model="queryParams.code"
+            placeholder="角色编码"
             clearable
             @keyup.enter="handleQuery"
           />
@@ -286,18 +280,8 @@ onMounted(() => {
         border
       >
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column label="角色名称" prop="name" min-width="100" />
-        <el-table-column label="角色编码" prop="code" width="150" />
-
-        <el-table-column label="状态" align="center" width="100">
-          <template #default="scope">
-            <el-tag v-if="scope.row.status === 1" type="success">正常</el-tag>
-            <el-tag v-else type="info">禁用</el-tag>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="排序" align="center" width="80" prop="sort" />
-
+        <el-table-column label="角色编码" prop="code" min-width="200" />
+        <el-table-column label="角色描述" prop="remark" />
         <el-table-column fixed="right" label="操作" width="220">
           <template #default="scope">
             <el-button
@@ -312,7 +296,7 @@ onMounted(() => {
               type="primary"
               size="small"
               link
-              @click="openDialog(scope.row.id)"
+              @click="openDialog(scope.row)"
             >
               <i-ep-edit />编辑
             </el-button>
@@ -350,37 +334,12 @@ onMounted(() => {
         :rules="rules"
         label-width="100px"
       >
-        <el-form-item label="角色名称" prop="name">
-          <el-input v-model="formData.name" placeholder="请输入角色名称" />
-        </el-form-item>
-
         <el-form-item label="角色编码" prop="code">
-          <el-input v-model="formData.code" placeholder="请输入角色编码" />
+          <el-input v-model="formData.code" :readonly="!!editingId" placeholder="请输入角色编码" />
         </el-form-item>
 
-        <el-form-item label="数据权限" prop="dataScope">
-          <el-select v-model="formData.dataScope">
-            <el-option :key="0" label="全部数据" :value="0" />
-            <el-option :key="1" label="部门及子部门数据" :value="1" />
-            <el-option :key="2" label="本部门数据" :value="2" />
-            <el-option :key="3" label="本人数据" :value="3" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="状态" prop="status">
-          <el-radio-group v-model="formData.status">
-            <el-radio :label="1">正常</el-radio>
-            <el-radio :label="0">停用</el-radio>
-          </el-radio-group>
-        </el-form-item>
-
-        <el-form-item label="排序" prop="sort">
-          <el-input-number
-            v-model="formData.sort"
-            controls-position="right"
-            :min="0"
-            style="width: 100px"
-          />
+        <el-form-item label="角色描述" prop="remark">
+          <el-input v-model="formData.remark" placeholder="请输入角色描述" />
         </el-form-item>
       </el-form>
 

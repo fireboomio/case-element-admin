@@ -1,7 +1,0 @@
-query MyQuery {
-  data: main_aggregateUser {
-    count: _count {
-      id
-    }
-  }
-}

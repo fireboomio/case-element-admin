@@ -1,0 +1,15 @@
+mutation UpdateOneMenu($id: Int!, $label: String, $path: String, $icon: String, $sort: Int, $level: Int, $MenuMenuToMenu: main_MenuUpdateOneWithoutOther_MenuNestedInput, $Role: main_RoleWhereUniqueInput) {
+  data: main_updateOneMenu(
+    data: {label: {set: $label}, path: {set: $path}, icon: {set: $icon}, sort: {set: $sort}, level: {set: $level}, MenuMenuToMenu: $MenuMenuToMenu, Role: {set: $Role}}
+    where: {id: $id}
+  ) {
+    
+    id
+    parentId
+    label
+    path
+    icon
+    sort
+    level
+  }
+}

@@ -1,0 +1,5 @@
+mutation MyQuery($ids: [Int]) {
+  data:main_deleteManyRole(where: {id: {in: $ids}}) {
+    count
+  }
+}

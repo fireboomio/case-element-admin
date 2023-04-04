@@ -1,8 +1,0 @@
-query MyQuery($userId: String!) {
-  data: main_findFirstUser(where: {id: {equals: $userId}}) {
-    Role {
-      code
-      remark
-    }
-  }
-}

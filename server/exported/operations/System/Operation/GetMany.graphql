@@ -1,0 +1,11 @@
+query MyQuery {
+  data: system_getAllApis @transform(get: "result") {
+    id
+    enabled
+    illegal
+    liveQuery
+    method
+    title
+    operationType
+  }
+}

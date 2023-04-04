@@ -1,0 +1,21 @@
+query GetMenuList($take: Int = 10, $skip: Int = 0, $orderBy: [main_MenuOrderByWithRelationInput], $query: main_MenuWhereInput) {
+  data: main_findManyMenu(
+    skip: $skip
+    take: $take
+  orderBy: $orderBy
+    where: {AND: $query}) {
+    
+    id
+    parentId
+    label
+    path
+    icon
+    sort
+    level
+  }
+  total: main_aggregateMenu(where: {AND: $query}) @transform(get: "_count.id") {
+    _count {
+      id
+    }
+  }
+}

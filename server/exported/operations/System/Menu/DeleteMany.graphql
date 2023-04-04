@@ -1,0 +1,5 @@
+mutation DeleteManyMenu($ids: [Int]!) {
+  data: main_deleteManyMenu(where: {id: {in: $ids}}) {
+    count
+  }
+}

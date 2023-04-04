@@ -53,7 +53,7 @@ const userList = ref<User[]>([]);
 async function handleQuery() {
   loading.value = true;
   const { error, data } = await api.query({
-    operationName: 'User/GetList',
+    operationName: 'System/User/GetList',
     input: convertPageQuery(queryParams, { containsFields: ['name']})
   });
   if (!error) {

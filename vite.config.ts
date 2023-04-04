@@ -42,6 +42,14 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       open: true, // 运行是否自动打开浏览器
       // 反向代理解决跨域
       proxy: {
+        '/operations': {
+          target: 'http://localhost:9991',
+          changeOrigin: true,
+        },
+        '/auth': {
+          target: 'http://localhost:9991',
+          changeOrigin: true,
+        },
         [env.VITE_APP_BASE_API]: {
           // 线上接口API地址
           target: 'http://vapi.youlai.tech',

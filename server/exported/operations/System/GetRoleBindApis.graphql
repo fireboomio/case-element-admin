@@ -1,5 +1,5 @@
-query GetRoleBindApis($code: String!) @rbac(requireMatchAny: [admin]) {
-  data: system_getRoleBindApis(GETApiV1RoleApisInput: {code: $code}) {
+query GetRoleBindApis($code: String!) {
+  data: system_getRoleBindApis(code: $code) {
     content
     createTime
     deleteTime

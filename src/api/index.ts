@@ -1,6 +1,8 @@
 import { createClient } from './client'
 
-export default createClient()
+export default createClient({
+  baseURL: ''
+})
 
 export type ConvertOptions<Fields> = {
   containsFields?: Fields[]

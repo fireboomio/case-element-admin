@@ -1,0 +1,7 @@
+mutation MyQuery($remark: String, $id: Int!) {
+  data: main_updateOneRole(data: {remark: {set: $remark}}, where: {id: $id}) {
+    code
+    id
+    remark
+  }
+}

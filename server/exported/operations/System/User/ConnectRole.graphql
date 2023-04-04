@@ -1,0 +1,8 @@
+mutation MyQuery($userId: String!, $code: String!) {
+  data: main_updateOneUser(data: {Role: {connect: {code: $code}}}, where: {id: $userId}) {
+    avatarUrl
+    createdAt
+    id
+    name
+  }
+}

@@ -181,11 +181,11 @@ export const usePermissionStore = defineStore('permission', () => {
               }
             },
             {
-              "path": "dict",
-              "component": "system/dict/index",
-              "name": "dictList",
+              "path": "permission",
+              "component": "system/permission/index",
+              "name": "permissionList",
               "meta": {
-                "title": "字典表",
+                "title": "API列表",
                 "icon": "api",
                 "hidden": false,
                 "roles": [
@@ -193,7 +193,21 @@ export const usePermissionStore = defineStore('permission', () => {
                 ],
                 "keepAlive": true
               }
-            }
+            },
+            // {
+            //   "path": "dict",
+            //   "component": "system/dict/index",
+            //   "name": "dictList",
+            //   "meta": {
+            //     "title": "字典表",
+            //     "icon": "api",
+            //     "hidden": false,
+            //     "roles": [
+            //       "admin"
+            //     ],
+            //     "keepAlive": true
+            //   }
+            // }
           ]
         }
       ]

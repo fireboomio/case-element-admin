@@ -74,7 +74,7 @@ async function handleQuery() {
  */
 function resetQuery() {
   queryFormRef.value.resetFields();
-  queryParams.skip = 0;
+  queryParams.pageNum = 1;
   handleQuery();
 }
 

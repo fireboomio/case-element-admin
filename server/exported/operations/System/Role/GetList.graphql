@@ -1,0 +1,17 @@
+query GetRoleList($take: Int = 10, $skip: Int = 0, $orderBy: [main_RoleOrderByWithRelationInput], $query: main_RoleWhereInput) {
+  data: main_findManyRole(
+    skip: $skip
+    take: $take
+  orderBy: $orderBy
+    where: {AND: $query}) {
+    
+    id
+    code
+    remark
+  }
+  total: main_aggregateRole(where: {AND: $query}) @transform(get: "_count.id") {
+    _count {
+      id
+    }
+  }
+}

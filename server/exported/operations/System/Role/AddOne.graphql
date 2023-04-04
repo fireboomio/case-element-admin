@@ -1,0 +1,7 @@
+mutation MyQuery($code: String!, $remark: String) {
+  data: main_createOneRole(data: {code: $code, remark: $remark}) {
+    id
+    code
+    remark
+  }
+}

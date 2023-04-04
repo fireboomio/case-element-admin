@@ -1,0 +1,5 @@
+mutation DeleteOneMenu($id: Int!) {
+  data: main_deleteOneMenu(where: {id: $id}) {
+    id
+  }
+}
