@@ -1,13 +1,11 @@
 import {
-  GraphQLFloat,
   GraphQLInt,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
   GraphQLList,
-  GraphQLID, GraphQLBoolean, GraphQLNonNull
+  GraphQLID, GraphQLBoolean, GraphQLNonNull, GraphQLFloat
 } from 'graphql';
-import {prisma} from 'generated/prisma'
 import fetch from "@web-std/fetch";
 import * as querystring from "querystring";
 
@@ -183,7 +181,7 @@ export default new GraphQLSchema({
             type: GraphQLString,
           },
           roleCode: {type: new GraphQLNonNull(GraphQLString)},
-          apis: {type: new GraphQLNonNull(new GraphQLList(GraphQLInt))},
+          apis: {type: new GraphQLNonNull(new GraphQLList(GraphQLFloat))},
           allRoles: {type: new GraphQLNonNull(new GraphQLList(GraphQLString))},
         },
         // response

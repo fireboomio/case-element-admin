@@ -88,35 +88,34 @@ async function onSubmit() {
       }
     });
   }
+  ElMessage.success('绑定完成')
   close();
 }
 
 watchEffect(async () => {
-  if (props.user?.id) {
+  if (props.modelValue && props.user) {
     loading.value = true;
-    const { error, data } = await api.query({
-      operationName: 'System/User/GetUserRole',
-      input: {
-        userId: props.user!.id
-      }
-    })
-    if (!error) {
-      originRoles = data!.data!.Role?.map(item => item.code!) || [];
-      selections.value = originRoles
-      for (const role of originRoles) {
-        tableRef.value!.toggleRowSelection(role, true);
+    const res1 = await api.query({
+      operationName: 'System/Role/GetMany'
+    });
+    if (!res1.error) {
+      roles.value = res1.data!.data!;
+      const { error, data } = await api.query({
+        operationName: 'System/User/GetUserRole',
+        input: {
+          userId: props.user!.id!
+        }
+      })
+      if (!error) {
+        originRoles = data!.data!.Role?.map(item => item.code!) || [];
+        selections.value = originRoles
+        const selectedRoles = roles.value.filter(item => originRoles.includes(item.code!));
+        for (const role of selectedRoles) {
+          tableRef.value!.toggleRowSelection(role, true);
+        }
       }
     }
     loading.value = false;
   }
 })
-
-onMounted(async () => {
-  const { error, data } = await api.query({
-    operationName: 'System/Role/GetMany'
-  });
-  if (!error) {
-    roles.value = data!.data!;
-  }
-});
 </script>

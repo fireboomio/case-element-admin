@@ -15,7 +15,7 @@ export default {
   >
     <el-table
       v-loading="loading"
-      :data="roles"
+      :data="apis"
       ref="tableRef"
       @selection-change="handleSelectionChange"
     >
@@ -58,12 +58,12 @@ const props = defineProps({
 const tableRef = ref<InstanceType<typeof ElTable>>()
 const emit = defineEmits(['update:modelValue']);
 const loading = ref(false);
-const roles = ref<Role[]>([]);
+const apis = ref<API[]>([]);
 const selections = ref<number[]>([]);
 let originApis: number[] = []
 
 function handleSelectionChange(_selections: API[]) {
-  selections.value = _selections.map(item => item.code!);
+  selections.value = _selections.map(item => +item.id!);
 }
 
 function close() {
@@ -88,23 +88,31 @@ async function onSubmit() {
     close();
   } else {
     ElMessage.error('绑定失败');
+    loading.value = false
   }
 }
 
 watchEffect(async () => {
   if (props.modelValue && props.role?.code) {
     loading.value = true;
-    const { error, data } = await api.query({
-      operationName: 'System/Role/GetRoleBindApis',
-      input: {
-        code: props.role.code
-      }
+    const res1 = await api.query({
+      operationName: 'System/Operation/GetMany'
     })
-    if (!error) {
-      originApis = data!.data?.map(item => item.id!) ?? []
-      selections.value = originApis
-      for (const role of originApis) {
-        tableRef.value!.toggleRowSelection(role, true);
+    if (!res1.error) {
+      apis.value = res1.data!.data!
+      const { error, data } = await api.query({
+        operationName: 'System/Role/GetRoleBindApis',
+        input: {
+          code: props.role.code
+        }
+      })
+      if (!error) {
+        originApis = data!.data?.map(item => item.id!) ?? []
+        selections.value = originApis
+        const selectedApis = apis.value.filter(item => originApis.includes(+item.id!))
+        for (const api of selectedApis) {
+          tableRef.value!.toggleRowSelection(api, true);
+        }
       }
     }
     loading.value = false;

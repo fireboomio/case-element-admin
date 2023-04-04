@@ -1,6 +1,6 @@
 [
 	{
-		"content": "query GetRoleBindApis($code: String!) @rbac(requireMatchAny: [admin]) {\n  data: system_getRoleBindApis(code: $code) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
+		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(code: $code) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
 		"createTime": "2023-03-28 10:10:29Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -13,9 +13,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[]",
+		"roles": "[\"admin\"]",
 		"title": "/System/Role/GetRoleBindApis",
-		"updateTime": "2023-04-04 10:17:05Z"
+		"updateTime": "2023-04-04 14:29:13Z"
 	},
 	{
 		"id": 1516639652216832,
@@ -27,10 +27,10 @@
 		"illegal": false,
 		"liveQuery": false,
 		"title": "/System/Role/BindRoleApis",
-		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {\n  open_BindRoleApis(allRoles: $allRoles, apis: $apis, roleCode: $roleCode) {\n    count\n  }\n}",
+		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Float]!, $roleCode: String!) {\n  open_BindRoleApis(allRoles: $allRoles, apis: $apis, roleCode: $roleCode) {\n    count\n  }\n} ",
 		"enabled": true,
 		"createTime": "2023-03-28 10:10:29Z",
-		"updateTime": "2023-04-04 11:33:20Z",
+		"updateTime": "2023-04-04 14:29:13Z",
 		"deleteTime": "",
 		"roleType": "requireMatchAny",
 		"roles": "[\"admin\"]"
@@ -594,7 +594,7 @@
 		"updateTime": "2023-04-04 03:12:17Z"
 	},
 	{
-		"content": "query MyQuery {\n  data: open_GetAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n  }\n}",
+		"content": "query MyQuery {\n  data: open_GetAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n    title\n    enabled\n  }\n}",
 		"createTime": "2023-04-04 03:51:04Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -609,7 +609,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/System/Operation/GetMany",
-		"updateTime": "2023-04-04 11:31:31Z"
+		"updateTime": "2023-04-04 13:40:26Z"
 	},
 	{
 		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(code: $code) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",

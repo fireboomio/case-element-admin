@@ -1,5 +1,5 @@
-mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {
+mutation BindRoleApis($allRoles: [String]!, $apis: [Float]!, $roleCode: String!) {
   open_BindRoleApis(allRoles: $allRoles, apis: $apis, roleCode: $roleCode) {
     count
   }
-}
+} 

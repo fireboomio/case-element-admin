@@ -5,7 +5,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import SvgIcon from '@/components/SvgIcon/index.vue';
 import IconSelect from '@/components/IconSelect/index.vue';
 import { Menu } from '../types'
 import api from '@/api';
@@ -20,7 +19,7 @@ const dialog = reactive<DialogOption>({
 
 const menuList = ref<Menu[]>([]);
 
-const formData = reactive<Required<Omit<Menu, 'id'>>>({
+const formData = reactive<Required<Omit<Menu, 'id' | 'parentId'>>>({
   label: '',
   level: 1,
   path: '',
@@ -31,7 +30,7 @@ const editingId = ref<number>();
 
 const rules = reactive({
   label: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
-  path: [{ required: true, message: '请输入路由路径', trigger: 'blur' }],
+  path: [{ required: true, message: '请输入菜单路径', trigger: 'blur' }],
 });
 
 // 选择表格的行菜单ID
@@ -66,14 +65,14 @@ function onRowClick(row: Menu) {
  *
  */
 function openDialog(menu?: Menu) {
-    dialog.visible = true;
-    if (menu) {
-      dialog.title = '编辑菜单';
-      editingId.value = menu.id;
-      merge(formData, menu)
-    } else {
-      dialog.title = '新增菜单';
-    }
+  dialog.visible = true;
+  if (menu) {
+    dialog.title = '编辑菜单';
+    editingId.value = menu.id;
+    merge(formData, menu)
+  } else {
+    dialog.title = '新增菜单';
+  }
 }
 
 /**
@@ -127,11 +126,17 @@ function handleDelete(menuId: number) {
     cancelButtonText: '取消',
     type: 'warning'
   })
-    .then(() => {
-      deleteMenu(menuId).then(() => {
+    .then(async () => {
+      const { error } = await api.mutate({
+        operationName: 'System/Menu/DeleteOne',
+        input: {
+          id: menuId
+        }
+      })
+      if (!error) {
         ElMessage.success('删除成功');
         handleQuery();
-      });
+      }
     })
     .catch(() => ElMessage.info('已取消删除'));
 }

@@ -87,6 +87,7 @@ async function onSubmit() {
       }
     });
   }
+  close()
   ElMessage.success('绑定成功');
   loading.value = false
 }
@@ -94,22 +95,24 @@ async function onSubmit() {
 watchEffect(async () => {
   if (props.modelValue && props.role?.code) {
     loading.value = true;
-    api.query({
+    const res1 = await api.query({
       operationName: 'System/Menu/GetMany',
-    }).then(({ data }) => {
-      menus.value = data!.data!
     })
-    const { error, data } = await api.query({
-      operationName: 'System/Role/GetBindMenus',
-      input: {
-        roleId: props.role.id!
-      }
-    })
-    if (!error) {
-      originMenus = data!.data?.map(item => item.id!) ?? []
-      selections.value = originMenus
-      for (const role of originMenus) {
-        tableRef.value!.toggleRowSelection(role, true);
+    if (!res1.error) {
+      menus.value = res1.data!.data!
+      const { error, data } = await api.query({
+        operationName: 'System/Role/GetBindMenus',
+        input: {
+          roleId: props.role.id!
+        }
+      })
+      if (!error) {
+        originMenus = data!.data?.map(item => item.id!) ?? []
+        selections.value = originMenus
+        const selectedMenus = menus.value.filter(item => originMenus.includes(item.id!))
+        for (const role of selectedMenus) {
+          tableRef.value!.toggleRowSelection(role, true);
+        }
       }
     }
     loading.value = false;

@@ -5,5 +5,7 @@ query MyQuery {
     liveQuery
     method
     operationType
+    title
+    enabled
   }
 }
