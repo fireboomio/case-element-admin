@@ -16,7 +16,7 @@ import {
 } from "fireboom-wundersdk/client";
 
 import type { CustomClaims, Role } from './claims'
-import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,Statistics__MonthlySalesResponse,            Statistics__MonthlySalesResponseData,Statistics__SaleTypePercentResponse,            Statistics__SaleTypePercentResponseData,Statistics__SalesTop10Response,            Statistics__SalesTop10ResponseData,Statistics__VisitTrendingResponse,            Statistics__VisitTrendingResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,System__Menu__CreateOneInput,System__Menu__CreateOneResponse,            System__Menu__CreateOneResponseData,System__Menu__DeleteManyInput,System__Menu__DeleteManyResponse,            System__Menu__DeleteManyResponseData,System__Menu__DeleteOneInput,System__Menu__DeleteOneResponse,            System__Menu__DeleteOneResponseData,System__Menu__GetListInput,System__Menu__GetListResponse,            System__Menu__GetListResponseData,System__Menu__GetManyResponse,            System__Menu__GetManyResponseData,System__Menu__GetOneInput,System__Menu__GetOneResponse,            System__Menu__GetOneResponseData,System__Menu__UpdateOneInput,System__Menu__UpdateOneResponse,            System__Menu__UpdateOneResponseData,System__Operation__GetManyResponse,            System__Operation__GetManyResponseData,System__Role__AddOneInput,System__Role__AddOneResponse,            System__Role__AddOneResponseData,System__Role__BindRoleApisInput,System__Role__BindRoleApisResponse,            System__Role__BindRoleApisResponseData,System__Role__ConnectOneMenuInput,System__Role__ConnectOneMenuResponse,            System__Role__ConnectOneMenuResponseData,System__Role__DeleteManyInput,System__Role__DeleteManyResponse,            System__Role__DeleteManyResponseData,System__Role__DeleteOneInput,System__Role__DeleteOneResponse,            System__Role__DeleteOneResponseData,System__Role__DisconnectOneMenuInput,System__Role__DisconnectOneMenuResponse,            System__Role__DisconnectOneMenuResponseData,System__Role__GetBindMenusInput,System__Role__GetBindMenusResponse,            System__Role__GetBindMenusResponseData,System__Role__GetListInput,System__Role__GetListResponse,            System__Role__GetListResponseData,System__Role__GetManyResponse,            System__Role__GetManyResponseData,System__Role__GetRoleBindApisInput,System__Role__GetRoleBindApisResponse,            System__Role__GetRoleBindApisResponseData,System__Role__UpdateOneInput,System__Role__UpdateOneResponse,            System__Role__UpdateOneResponseData,System__User__ConnectRoleInput,System__User__ConnectRoleResponse,            System__User__ConnectRoleResponseData,System__User__CountUsersResponse,            System__User__CountUsersResponseData,System__User__CreateOneInput,System__User__CreateOneResponse,            System__User__CreateOneResponseData,System__User__DisconnectRoleInput,System__User__DisconnectRoleResponse,            System__User__DisconnectRoleResponseData,System__User__GetListInput,System__User__GetListResponse,            System__User__GetListResponseData,System__User__GetOneInput,System__User__GetOneResponse,            System__User__GetOneResponseData,System__User__GetUserRoleInput,System__User__GetUserRoleResponse,            System__User__GetUserRoleResponseData,User__MeResponse,            User__MeResponseData, } from './models'
+import type { Post__CreateOneInput,Post__CreateOneResponse,            Post__CreateOneResponseData,Post__DeleteManyInput,Post__DeleteManyResponse,            Post__DeleteManyResponseData,Post__DeleteOneInput,Post__DeleteOneResponse,            Post__DeleteOneResponseData,Post__GetListInput,Post__GetListResponse,            Post__GetListResponseData,Post__GetOneInput,Post__GetOneResponse,            Post__GetOneResponseData,Post__UpdateOneInput,Post__UpdateOneResponse,            Post__UpdateOneResponseData,System__BindRoleApisInput,System__BindRoleApisResponse,            System__BindRoleApisResponseData,System__GetRoleBindApisInput,System__GetRoleBindApisResponse,            System__GetRoleBindApisResponseData,System__Menu__CreateOneInput,System__Menu__CreateOneResponse,            System__Menu__CreateOneResponseData,System__Menu__DeleteManyInput,System__Menu__DeleteManyResponse,            System__Menu__DeleteManyResponseData,System__Menu__DeleteOneInput,System__Menu__DeleteOneResponse,            System__Menu__DeleteOneResponseData,System__Menu__GetListInput,System__Menu__GetListResponse,            System__Menu__GetListResponseData,System__Menu__GetManyResponse,            System__Menu__GetManyResponseData,System__Menu__GetOneInput,System__Menu__GetOneResponse,            System__Menu__GetOneResponseData,System__Menu__UpdateOneInput,System__Menu__UpdateOneResponse,            System__Menu__UpdateOneResponseData,System__Role__AddOneInput,System__Role__AddOneResponse,            System__Role__AddOneResponseData,System__Role__ConnectOneMenuInput,System__Role__ConnectOneMenuResponse,            System__Role__ConnectOneMenuResponseData,System__Role__DeleteManyInput,System__Role__DeleteManyResponse,            System__Role__DeleteManyResponseData,System__Role__DeleteOneInput,System__Role__DeleteOneResponse,            System__Role__DeleteOneResponseData,System__Role__DisconnectOneMenuInput,System__Role__DisconnectOneMenuResponse,            System__Role__DisconnectOneMenuResponseData,System__Role__GetBindMenusInput,System__Role__GetBindMenusResponse,            System__Role__GetBindMenusResponseData,System__Role__GetListInput,System__Role__GetListResponse,            System__Role__GetListResponseData,System__Role__GetManyResponse,            System__Role__GetManyResponseData,System__Role__GetRoleBindApisInput,System__Role__GetRoleBindApisResponse,            System__Role__GetRoleBindApisResponseData,System__Role__UpdateOneInput,System__Role__UpdateOneResponse,            System__Role__UpdateOneResponseData,System__User__ConnectRoleInput,System__User__ConnectRoleResponse,            System__User__ConnectRoleResponseData,System__User__CountUsersResponse,            System__User__CountUsersResponseData,System__User__CreateOneInput,System__User__CreateOneResponse,            System__User__CreateOneResponseData,System__User__DisconnectRoleInput,System__User__DisconnectRoleResponse,            System__User__DisconnectRoleResponseData,System__User__GetListInput,System__User__GetListResponse,            System__User__GetListResponseData,System__User__GetOneInput,System__User__GetOneResponse,            System__User__GetOneResponseData,System__User__GetUserRoleInput,System__User__GetUserRoleResponse,            System__User__GetUserRoleResponseData,User__MeResponse,            User__MeResponseData, } from './models'
 
 export const WUNDERGRAPH_S3_ENABLED = false
 export const WUNDERGRAPH_AUTH_ENABLED = true
@@ -32,7 +32,7 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-    applicationHash: "1b970ea6",
+    applicationHash: "2517e8dc",
     baseURL: "http://localhost:9991",
     sdkVersion: "",
 }
@@ -59,22 +59,6 @@ export const operationMetadata: OperationMetadata = {
 		}
     ,
     "Post/UpdateOne": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/MonthlySales": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/SaleTypePercent": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/SalesTop10": {
-        requiresAuthentication: false
-		}
-    ,
-    "Statistics/VisitTrending": {
         requiresAuthentication: false
 		}
     ,
@@ -114,16 +98,8 @@ export const operationMetadata: OperationMetadata = {
         requiresAuthentication: false
 		}
     ,
-    "System/Operation/GetMany": {
-        requiresAuthentication: false
-		}
-    ,
     "System/Role/AddOne": {
         requiresAuthentication: false
-		}
-    ,
-    "System/Role/BindRoleApis": {
-        requiresAuthentication: true
 		}
     ,
     "System/Role/ConnectOneMenu": {
@@ -253,30 +229,6 @@ export type Queries = {
         requiresAuthentication: false
         
     }
-    'Statistics/MonthlySales': {
-        input?: undefined
-        data: Statistics__MonthlySalesResponseData
-        requiresAuthentication: false
-        
-    }
-    'Statistics/SaleTypePercent': {
-        input?: undefined
-        data: Statistics__SaleTypePercentResponseData
-        requiresAuthentication: false
-        
-    }
-    'Statistics/SalesTop10': {
-        input?: undefined
-        data: Statistics__SalesTop10ResponseData
-        requiresAuthentication: false
-        
-    }
-    'Statistics/VisitTrending': {
-        input?: undefined
-        data: Statistics__VisitTrendingResponseData
-        requiresAuthentication: false
-        
-    }
     'System/GetRoleBindApis': {
         input: System__GetRoleBindApisInput
         data: System__GetRoleBindApisResponseData
@@ -298,12 +250,6 @@ export type Queries = {
     'System/Menu/GetOne': {
         input: System__Menu__GetOneInput
         data: System__Menu__GetOneResponseData
-        requiresAuthentication: false
-        
-    }
-    'System/Operation/GetMany': {
-        input?: undefined
-        data: System__Operation__GetManyResponseData
         requiresAuthentication: false
         
     }
@@ -413,11 +359,6 @@ export type Mutations = {
         input: System__Role__AddOneInput
         data: System__Role__AddOneResponseData
         requiresAuthentication: false
-    }
-    'System/Role/BindRoleApis': {
-        input: System__Role__BindRoleApisInput
-        data: System__Role__BindRoleApisResponseData
-        requiresAuthentication: true
     }
     'System/Role/ConnectOneMenu': {
         input: System__Role__ConnectOneMenuInput

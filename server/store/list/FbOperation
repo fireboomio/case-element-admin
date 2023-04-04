@@ -13,27 +13,27 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[]",
 		"title": "/System/Role/GetRoleBindApis",
-		"updateTime": "2023-04-04 01:17:42Z"
+		"updateTime": "2023-04-04 10:17:05Z"
 	},
 	{
-		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {\n  data: system_bindRoleApis(\n    POSTApiV1RoleBindApiInput: {roleCode: $roleCode, apis: $apis, allRoles: $allRoles}\n  ) {\n    count\n  }\n}",
-		"createTime": "2023-03-28 10:10:29Z",
-		"deleteTime": "",
-		"enabled": true,
 		"id": 1516639652216832,
-		"illegal": false,
-		"isPublic": true,
-		"liveQuery": false,
 		"method": "POST",
-		"operationType": "mutations",
-		"remark": "",
 		"restUrl": "",
-		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"operationType": "mutations",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
 		"title": "/System/Role/BindRoleApis",
-		"updateTime": "2023-03-30 06:38:28Z"
+		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {\n  open_BindRoleApis(allRoles: $allRoles, apis: $apis, roleCode: $roleCode) {\n    count\n  }\n}",
+		"enabled": true,
+		"createTime": "2023-03-28 10:10:29Z",
+		"updateTime": "2023-04-04 11:33:20Z",
+		"deleteTime": "",
+		"roleType": "requireMatchAny",
+		"roles": "[\"admin\"]"
 	},
 	{
 		"content": "mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID)) {\n  data: main_createOnePost(\n    data: {title: $title, poster: $poster, publishedAt: $publishedAt, User: {connect: {id: $userId}}, content: $content}\n  ) {\n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
@@ -211,27 +211,27 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[]",
 		"title": "/System/User/CountUsers",
-		"updateTime": "2023-03-30 06:51:32Z"
+		"updateTime": "2023-04-04 10:17:05Z"
 	},
 	{
-		"id": 1546182777700352,
-		"method": "GET",
-		"restUrl": "",
-		"operationType": "queries",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/Statistics/MonthlySales",
 		"content": "query MyQuery {\n  data: statistics_GetMonthlySales {\n    months\n    totalSales\n  }\n} ",
-		"enabled": true,
 		"createTime": "2023-04-02 15:23:41Z",
-		"updateTime": "2023-04-04 10:27:55Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 1546182777700352,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "",
-		"roles": ""
+		"roles": "",
+		"title": "/Statistics/MonthlySales",
+		"updateTime": "2023-04-04 10:27:55Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: statistics_GetSalesTop10 {\n    shopName\n    totalSales\n  }\n}",
@@ -594,7 +594,7 @@
 		"updateTime": "2023-04-04 03:12:17Z"
 	},
 	{
-		"content": "query MyQuery {\n  data: system_getAllApis @transform(get: \"result\") {\n    id\n    enabled\n    illegal\n    liveQuery\n    method\n    title\n    operationType\n  }\n}",
+		"content": "query MyQuery {\n  data: open_GetAllApis {\n    createTime\n    id\n    liveQuery\n    method\n    operationType\n  }\n}",
 		"createTime": "2023-04-04 03:51:04Z",
 		"deleteTime": "",
 		"enabled": true,
@@ -609,7 +609,7 @@
 		"roleType": "",
 		"roles": "",
 		"title": "/System/Operation/GetMany",
-		"updateTime": "2023-04-04 07:34:39Z"
+		"updateTime": "2023-04-04 11:31:31Z"
 	},
 	{
 		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(code: $code) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
@@ -698,7 +698,6 @@
 		"restUrl": "",
 		"roleType": "",
 		"roles": "",
-		"title": "/System/Role/GetBindMenus",
-		"updateTime": "2023-04-04 10:01:16Z"
+		"title": "/System/Role/GetBindMenus"
 	}
 ]
