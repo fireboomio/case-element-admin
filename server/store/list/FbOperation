@@ -13,9 +13,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[]",
 		"title": "/System/Role/GetRoleBindApis",
-		"updateTime": "2023-04-04 01:17:42Z"
+		"updateTime": "2023-04-04 10:17:05Z"
 	},
 	{
 		"content": "mutation BindRoleApis($allRoles: [String]!, $apis: [Int]!, $roleCode: String!) @rbac(requireMatchAny: [admin]) {\n  data: system_bindRoleApis(\n    POSTApiV1RoleBindApiInput: {roleCode: $roleCode, apis: $apis, allRoles: $allRoles}\n  ) {\n    count\n  }\n}",
@@ -31,9 +31,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[]",
 		"title": "/System/Role/BindRoleApis",
-		"updateTime": "2023-03-30 06:38:28Z"
+		"updateTime": "2023-04-04 10:17:05Z"
 	},
 	{
 		"content": "mutation CreateOnePost($title: String!, $poster: String, $content: String, $publishedAt: DateTime, $userId: String! @fromClaim(name: USERID)) {\n  data: main_createOnePost(\n    data: {title: $title, poster: $poster, publishedAt: $publishedAt, User: {connect: {id: $userId}}, content: $content}\n  ) {\n    id\n    title\n    poster\n    publishedAt\n    authorId\n    User {\n      name\n      id\n      avatarUrl\n    }\n  }\n}",
@@ -211,9 +211,9 @@
 		"remark": "",
 		"restUrl": "",
 		"roleType": "requireMatchAny",
-		"roles": "[\"admin\"]",
+		"roles": "[]",
 		"title": "/System/User/CountUsers",
-		"updateTime": "2023-03-30 06:51:32Z"
+		"updateTime": "2023-04-04 10:17:05Z"
 	},
 	{
 		"content": "query MyQuery {\n  data: statistics_GetMonthlySales {\n    months\n    totalSales\n  }\n}",
@@ -594,22 +594,22 @@
 		"updateTime": "2023-04-04 03:12:17Z"
 	},
 	{
-		"id": 1554783933628416,
-		"method": "GET",
-		"restUrl": "",
-		"operationType": "queries",
-		"isPublic": true,
-		"remark": "",
-		"illegal": false,
-		"liveQuery": false,
-		"title": "/System/Operation/GetMany",
 		"content": "query MyQuery {\n  data: system_getAllApis @transform(get: \"result\") {\n    id\n    enabled\n    illegal\n    liveQuery\n    method\n    title\n    operationType\n  }\n}",
-		"enabled": true,
 		"createTime": "2023-04-04 03:51:04Z",
-		"updateTime": "2023-04-04 06:39:24Z",
 		"deleteTime": "",
+		"enabled": true,
+		"id": 1554783933628416,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
 		"roleType": "",
-		"roles": ""
+		"roles": "",
+		"title": "/System/Operation/GetMany",
+		"updateTime": "2023-04-04 06:39:24Z"
 	},
 	{
 		"content": "query GetRoleBindApis($code: String!) {\n  data: system_getRoleBindApis(code: $code) {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    method\n    operationType\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
@@ -646,5 +646,77 @@
 		"roles": "",
 		"title": "/System/BindRoleApis",
 		"updateTime": ""
+	},
+	{
+		"content": "query MyQuery($code: String!, $roleType: String = \"\") {\n  open_GetRoleBindApis(code: $code, roleType: $roleType) {\n    content\n    createTime\n    enabled\n    id\n    deleteTime\n  }\n}",
+		"createTime": "2023-04-04 09:13:24Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1556051369787392,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/GetRoleBindApis",
+		"updateTime": "2023-04-04 10:11:47Z"
+	},
+	{
+		"content": "query MyQuery {\n  open_GetAllRoles {\n    code\n    remark\n  }\n}",
+		"createTime": "2023-04-04 09:38:49Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1556151315595264,
+		"illegal": false,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "GET",
+		"operationType": "queries",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/GetAllRoles",
+		"updateTime": "2023-04-04 10:07:18Z"
+	},
+	{
+		"content": "mutation MyQuery($allRoles: [String]!, $apis: [Int] = 10, $roleCode: String!, $roleType: String) {\n  open_BindRoleApis(\n    allRoles: $allRoles\n    apis: $apis\n    roleCode: $roleCode\n    roleType: $roleType\n  ) {\n    count\n  }\n}",
+		"createTime": "2023-04-04 10:11:59Z",
+		"deleteTime": "",
+		"enabled": true,
+		"id": 1556281749995520,
+		"illegal": true,
+		"isPublic": true,
+		"liveQuery": false,
+		"method": "POST",
+		"operationType": "mutations",
+		"remark": "",
+		"restUrl": "",
+		"roleType": "",
+		"roles": "",
+		"title": "/BindRoleApis",
+		"updateTime": "2023-04-04 10:20:51Z"
+	},
+	{
+		"id": 1556340740259840,
+		"method": "GET",
+		"restUrl": "",
+		"operationType": "queries",
+		"isPublic": true,
+		"remark": "",
+		"illegal": false,
+		"liveQuery": false,
+		"title": "/GetAllApis",
+		"content": "query MyQuery {\n  open_GetAllApis {\n    content\n    createTime\n    deleteTime\n    enabled\n    id\n    illegal\n    isPublic\n    liveQuery\n    operationType\n    method\n    remark\n    restUrl\n    roleType\n    roles\n    title\n    updateTime\n  }\n}",
+		"enabled": true,
+		"createTime": "2023-04-04 10:26:59Z",
+		"updateTime": "2023-04-04 10:27:30Z",
+		"deleteTime": "",
+		"roleType": "",
+		"roles": ""
 	}
 ]
