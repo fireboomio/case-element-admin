@@ -1,0 +1,8 @@
+mutation MyQuery($id: Int!, $menuId: Int!) {
+  data: main_updateOneRole(
+    data: {Menu: {disconnect: {id: $menuId}}}
+    where: {id: $id}
+  ) {
+    id
+  }
+}

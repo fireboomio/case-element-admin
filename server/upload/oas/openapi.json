@@ -147,65 +147,68 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "content": {
-                      "description": "内容",
-                      "type": "string"
-                    },
-                    "createTime": {
-                      "type": "string"
-                    },
-                    "deleteTime": {
-                      "type": "string"
-                    },
-                    "enabled": {
-                      "description": "开关 true开 false关",
-                      "type": "boolean"
-                    },
-                    "id": {
-                      "type": "integer"
-                    },
-                    "illegal": {
-                      "description": "是否非法 true 非法 false 合法",
-                      "type": "boolean"
-                    },
-                    "isPublic": {
-                      "description": "状态 true 公有 false 私有",
-                      "type": "boolean"
-                    },
-                    "liveQuery": {
-                      "description": "是否实时 true 是 false 否",
-                      "type": "boolean"
-                    },
-                    "method": {
-                      "description": "方法类型 GET、POST、PUT、DELETE",
-                      "type": "string"
-                    },
-                    "operationType": {
-                      "description": "请求类型 queries,mutations,subscriptions",
-                      "type": "string"
-                    },
-                    "remark": {
-                      "description": "说明",
-                      "type": "string"
-                    },
-                    "restUrl": {
-                      "description": "方法类型 GET、POST、PUT、DELETE",
-                      "type": "string"
-                    },
-                    "roleType": {
-                      "type": "string"
-                    },
-                    "roles": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "description": "路径",
-                      "type": "string"
-                    },
-                    "updateTime": {
-                      "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "content": {
+                        "description": "内容",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "type": "string"
+                      },
+                      "deleteTime": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "description": "开关 true开 false关",
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "illegal": {
+                        "description": "是否非法 true 非法 false 合法",
+                        "type": "boolean"
+                      },
+                      "isPublic": {
+                        "description": "状态 true 公有 false 私有",
+                        "type": "boolean"
+                      },
+                      "liveQuery": {
+                        "description": "是否实时 true 是 false 否",
+                        "type": "boolean"
+                      },
+                      "method": {
+                        "description": "方法类型 GET、POST、PUT、DELETE",
+                        "type": "string"
+                      },
+                      "operationType": {
+                        "description": "请求类型 queries,mutations,subscriptions",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "说明",
+                        "type": "string"
+                      },
+                      "restUrl": {
+                        "description": "方法类型 GET、POST、PUT、DELETE",
+                        "type": "string"
+                      },
+                      "roleType": {
+                        "type": "string"
+                      },
+                      "roles": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "description": "路径",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "type": "string"
+                      }
                     }
                   }
                 }

@@ -1,6 +1,10 @@
 <script lang="ts">
 export default {
-  name: 'role'
+  name: 'role',
+  components: {
+    RoleBindApi,
+    RoleBindMenu
+  }
 };
 </script>
 
@@ -9,6 +13,8 @@ import api, { convertPageQuery } from '@/api';
 import { merge } from '@/utils';
 import {  FormRules } from 'element-plus';
 import { Role } from '../types';
+import RoleBindApi from './api.bind.vue'
+import RoleBindMenu from './menu.bind.vue'
 
 const queryFormRef = ref(ElForm);
 const roleFormRef = ref(ElForm);
@@ -23,7 +29,7 @@ const queryParams = reactive<PageQuery>({
   pageSize: 10
 });
 
-const roleList = ref<Role[]>();
+const roleList = ref<Role[]>([]);
 
 const dialog = reactive<DialogOption>({
   visible: false
@@ -39,11 +45,9 @@ const rules = reactive<FormRules>({
   code: [{ required: true, message: '请输入角色编码', trigger: 'blur' }]
 });
 
-interface CheckedRole {
-  id?: number;
-  name?: string;
-}
-let checkedRole: CheckedRole = reactive({});
+const apiBindVisible = ref(false)
+const menuBindVisible = ref(false)
+const bindingRole = ref<Role>()
 
 /**
  * 查询
@@ -60,6 +64,7 @@ async function handleQuery() {
   }
   loading.value = false;
 }
+
 /**
  * 重置查询
  */
@@ -177,58 +182,16 @@ function handleDelete(roleId?: number) {
 }
 
 /**
- * 打开分配菜单弹窗
+ * 权限配置
  */
-function openMenuDialog(row: Role) {
-  const roleId = row.id;
-  if (roleId) {
-    checkedRole = {
-      id: roleId,
-      name: row.name
-    };
-    menuDialogVisible.value = true;
-    loading.value = true;
-
-    // 获取所有的菜单
-    listMenuOptions().then(response => {
-      menuList.value = response.data;
-      // 回显角色已拥有的菜单
-      getRoleMenuIds(roleId)
-        .then(({ data }) => {
-          const checkedMenuIds = data;
-          console.log('勾选权限', checkedMenuIds);
-          checkedMenuIds.forEach(menuId =>
-            menuRef.value.setChecked(menuId, true, false)
-          );
-        })
-        .finally(() => {
-          loading.value = false;
-        });
-    });
-  }
+function openApiBindDialog(role: Role) {
+  apiBindVisible.value = true;
+  bindingRole.value = role
 }
 
-/**
- * 角色分配菜单提交
- */
-function handleRoleMenuSubmit() {
-  const roleId = checkedRole.id;
-  if (roleId) {
-    const checkedMenuIds: number[] = menuRef.value
-      .getCheckedNodes(false, true)
-      .map((node: any) => node.value);
-
-    loading.value = true;
-    updateRoleMenus(roleId, checkedMenuIds)
-      .then(res => {
-        ElMessage.success('分配权限成功');
-        menuDialogVisible.value = false;
-        resetQuery();
-      })
-      .finally(() => {
-        loading.value = false;
-      });
-  }
+function openMenuBindDialog(role: Role) {
+  menuBindVisible.value = true;
+  bindingRole.value = role
 }
 
 onMounted(() => {
@@ -282,15 +245,23 @@ onMounted(() => {
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="角色编码" prop="code" min-width="200" />
         <el-table-column label="角色描述" prop="remark" />
-        <el-table-column fixed="right" label="操作" width="220">
+        <el-table-column fixed="right" label="操作" width="320">
           <template #default="scope">
             <el-button
               type="primary"
               size="small"
               link
-              @click="openMenuDialog(scope.row)"
+              @click="openApiBindDialog(scope.row)"
             >
               <i-ep-position />分配权限
+            </el-button>
+            <el-button
+              type="primary"
+              size="small"
+              link
+              @click="openMenuBindDialog(scope.row)"
+            >
+              <i-ep-position />分配菜单
             </el-button>
             <el-button
               type="primary"
@@ -351,34 +322,9 @@ onMounted(() => {
       </template>
     </el-dialog>
 
+    <!-- 分配API弹窗  -->
+    <role-bind-api v-model="apiBindVisible" :role="bindingRole" :roles="roleList" />
     <!-- 分配菜单弹窗  -->
-    <el-dialog
-      :title="'【' + checkedRole.name + '】权限分配'"
-      v-model="menuDialogVisible"
-      width="800px"
-    >
-      <el-scrollbar max-height="600px" v-loading="loading">
-        <el-tree
-          ref="menuRef"
-          node-key="value"
-          show-checkbox
-          :data="menuList"
-          :default-expand-all="true"
-        >
-          <template #default="{ data }">
-            {{ data.label }}
-          </template>
-        </el-tree>
-      </el-scrollbar>
-
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="handleRoleMenuSubmit"
-            >确 定</el-button
-          >
-          <el-button @click="menuDialogVisible = false">取 消</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <role-bind-menu v-model="menuBindVisible" :role="bindingRole" />
   </div>
 </template>

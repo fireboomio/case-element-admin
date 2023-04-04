@@ -1,3 +1,4 @@
+import { useUserStoreHook } from '@/store/modules/user';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 export const Layout = () => import('@/layout/index.vue');
@@ -115,6 +116,17 @@ const router = createRouter({
 export function resetRouter() {
   router.replace({ path: '/login' });
   location.reload();
+}
+
+export async function initSyncRouters() {
+  const userStore = useUserStoreHook();
+  const routes = await userStore.init()
+  // 添加异步路由
+  if (routes) {
+    for(const route of routes) {
+      router.addRoute(route)
+    }
+  }
 }
 
 export default router;

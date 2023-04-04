@@ -11,6 +11,7 @@
     <el-table
       v-loading="loading"
       :data="roles"
+      ref="tableRef"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
@@ -34,6 +35,7 @@
 
 <script setup lang="ts">
 import api from '@/api';
+import { ElTable } from 'element-plus';
 import { PropType } from 'vue';
 import type { Role, User } from '../types';
 
@@ -46,6 +48,7 @@ const props = defineProps({
     type: Object as PropType<User>
   }
 });
+const tableRef = ref<InstanceType<typeof ElTable>>()
 const emit = defineEmits(['update:modelValue']);
 const loading = ref(false);
 const roles = ref<Role[]>([]);
@@ -100,6 +103,9 @@ watchEffect(async () => {
     if (!error) {
       originRoles = data!.data!.Role?.map(item => item.code!) || [];
       selections.value = originRoles
+      for (const role of originRoles) {
+        tableRef.value!.toggleRowSelection(role, true);
+      }
     }
     loading.value = false;
   }

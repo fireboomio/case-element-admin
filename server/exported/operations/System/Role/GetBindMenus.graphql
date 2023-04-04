@@ -1,0 +1,13 @@
+query MyQuery($roleId: Int!) {
+  data: main_findFirstRole(where: {id: {equals: $roleId}}) @transform(get: "Menu") {
+    Menu {
+      id
+      icon
+      label
+      level
+      path
+      sort
+      parentId
+    }
+  }
+}
