@@ -1,4 +1,4 @@
-mutation MyQuery($allRoles: [String]!, $apis: [Int] = 10, $roleCode: String!, $roleType: String) {
+mutation MyQuery($allRoles: [String]!, $apis: [Float]!, $roleCode: String!, $roleType: String) {
   open_BindRoleApis(
     allRoles: $allRoles
     apis: $apis
