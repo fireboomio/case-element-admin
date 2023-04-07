@@ -31,6 +31,8 @@
 ### GitPod 启动
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/fireboomio/case-element-admin)
 
+> **_NOTE:_** GitPod 仅作为临时演示工具，真实项目请以本地开发为主，请在 GitPod 启动后参考[启动后修改](#启动后修改)章节做相应的修改
+
 ### 环境准备
 ```bash
 # 安装 pnpm
@@ -69,8 +71,9 @@ cd server
 ### 启动后修改
 
 1. 修改身份认证相关配置：参考[身份认证服务商准备章节](https://ansons-organization.gitbook.io/product-manual/huan-jing-zhun-bei#shen-fen-ren-zheng-oidc)准备认证服务商，参考[配置身份认证章节](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/yan-zheng-he-shou-quan/shen-fen-yan-zheng)修改当前的身份认证配置。
-2. 修改数据源配置，当前项目中使用 `sqlite` 作为示例数据源，请根据实际情况修改
-3. 回调地址修改
+2. 回调地址修改：目前项目中使用的是 auth0 创建的一个身份认证服务，如果你修改了第1步的身份认证，请点击 Fireboom 控制台中配置的身份验证的详情，复制“登录回调地址”的值并前往你配置的身份认证服务提供商的应用配置中添加该回调地址。同时点击 Fireboom 控制台中的设置 -> 安全 -> 增加重定向URL，添加当前 admin 项目的域名地址。
+3. 修改数据源配置：当前项目中使用 `sqlite` 作为示例数据源，如果需要使用其它数据库请根据实际情况修改，[参考数据源配置文档](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/shu-ju-yuan/shu-ju-ku/shu-ju-ku-lian-jie)
+
 
 ### Prisma 结构
 
