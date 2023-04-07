@@ -1,14 +1,19 @@
 tasks:
   - name: setup web
-    init: pnpm install
+    init: >
+      pnpm install &&
+      cd server &&
+      sh update.sh &&
+      cd custom-ts &&
+      pnpm install &&
+      gp sync-done bundle
     command: pnpm run dev
   - name: setup middleware
-    before: cd server && sh update.sh
-    init: ./fireboom build
-    command: cd custom-ts && pnpm run dev
+    init: gp sync-await bundle
+    command: cd server/custom-ts && pnpm run dev
   - name: setup server
-    before: cd server
-    command: ./fireboom dev
+    init: gp sync-await bundle
+    command: cd server && ./fireboom dev
 ports:
   - port: 3000
     onOpen: open-preview
