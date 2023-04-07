@@ -1,0 +1,20 @@
+tasks:
+  - name: setup web
+    init: pnpm install
+    command: pnpm run dev
+  - name: setup middleware
+    before: cd server && sh update.sh
+    init: ./fireboom build
+    command: cd custom-ts && pnpm run dev
+  - name: setup server
+    before: cd server
+    command: ./fireboom dev
+ports:
+  - port: 3000
+    onOpen: open-preview
+  - port: 9123
+    onOpen: open-preview
+  - port: 9991
+    onOpen: ignore
+  - port: 9992
+    onOpen: ignore

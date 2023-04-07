@@ -28,6 +28,9 @@
 
 ## 项目启动
 
+### GitPod 启动
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/fireboomio/case-element-admin)
+
 ### 环境准备
 ```bash
 # 安装 pnpm
