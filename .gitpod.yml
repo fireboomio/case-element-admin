@@ -6,6 +6,7 @@ tasks:
       sh update.sh &&
       cd custom-ts &&
       pnpm install &&
+      cd ../../ &&
       gp sync-done bundle
     command: pnpm run dev
   - name: setup middleware
