@@ -5,7 +5,7 @@
     "apiListenHost": "localhost",
     "apiListenPort": "9991",
     "hooksServerURL": "http://localhost:9992",
-    "hooksServerPath": "./custom-ts",
+    "hooksServerLanguage": "",
     "logLevel": -1,
     "isDev": true,
     "forcedJumpEnabled": true,
