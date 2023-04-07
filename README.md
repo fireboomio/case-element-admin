@@ -66,6 +66,78 @@ cd server
 ./fireboom dev
 ```
 
+### 启动后修改
+
+1. 修改身份认证相关配置
+2. 修改数据源配置，当前项目中使用 `sqlite` 作为示例数据源
+
+### Prisma 结构
+
+```prisma
+model Menu {
+  id             Int     @id @default(autoincrement())
+  parentId       Int?
+  label          String
+  path           String
+  icon           String?
+  sort           Int     @default(0)
+  level          Int     @default(1)
+  MenuMenuToMenu Menu?   @relation("MenuToMenu", fields: [parentId], references: [id])
+  other_Menu     Menu[]  @relation("MenuToMenu")
+  Role           Role[]
+}
+
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String
+  poster      String?
+  publishedAt DateTime?
+  authorId    String
+  content     String?
+  User        User      @relation(fields: [authorId], references: [id])
+}
+
+model Role {
+  id     Int     @id @default(autoincrement())
+  code   String  @unique
+  remark String?
+  Menu   Menu[]
+  User   User[]
+}
+
+model SaleLog {
+  id       Int      @id @default(autoincrement())
+  shopName String
+  day      DateTime
+  sales    Float
+  typeId   Int
+  SaleType SaleType @relation(fields: [typeId], references: [id])
+}
+
+model SaleType {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  SaleLog   SaleLog[]
+}
+
+model User {
+  id        String   @id
+  createdAt DateTime @default(now())
+  name      String
+  avatarUrl String?
+  Post      Post[]
+  Role      Role[]
+}
+
+model VisitLog {
+  id        Int      @id @default(autoincrement())
+  ip        String
+  ua        String
+  visitedAt DateTime @default(now())
+}
+```
+
 ### 项目打包
 
 ```bash
