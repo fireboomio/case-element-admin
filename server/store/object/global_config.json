@@ -1,5 +1,5 @@
 {
-  "disableForceHttpsRedirects": true,
+  "disableForceHttpsRedirects": false,
   "authorizedRedirectUris": [
     "http://localhost:9123/#/workbench/userInfo",
     "http://localhost:9123/#/workbench/rapi/loginBack",

@@ -4,8 +4,6 @@ import { usePermissionStoreHook } from '@/store/modules/permission';
 
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import api from './api';
-import { AuthProviderId } from './api/client';
 NProgress.configure({ showSpinner: false }); // 进度条
 
 const permissionStore = usePermissionStoreHook();
@@ -44,8 +42,8 @@ router.beforeEach(async (to, from, next) => {
       } else {
         // 移除 token 并跳转登录页
         // await userStore.resetToken();
-        api.login('auth0', location.origin)
-        // next(`/login?redirect=${to.path}`);
+        // api.login('auth0', location.origin)
+        next(`/login?redirect=${to.path}`);
         NProgress.done();
       }
     }

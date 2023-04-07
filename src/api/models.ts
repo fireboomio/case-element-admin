@@ -1,4 +1,103 @@
-export interface Post__CreateOneInput {
+export interface BindRoleApisInput {
+   allRoles: {
+   }[],
+               apis: {
+   }[],
+                 roleCode: string
+                 roleType?: string
+            
+}
+export interface InternalBindRoleApisInput {
+    allRoles: {
+    }[],
+    apis: {
+    }[],
+      roleCode: string
+      roleType?: string
+}
+export interface InjectedBindRoleApisInput {
+   allRoles: {
+   }[],
+       apis: {
+   }[],
+         roleCode: string
+         roleType?: string
+    
+}
+
+
+    
+export interface BindRoleApisResponse {
+    data?: BindRoleApisResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface BindRoleApisResponseData {
+    open_BindRoleApis?: {
+        count?: number
+    },
+}
+
+    
+export interface GetAllApisResponse {
+    data?: GetAllApisResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface GetAllApisResponseData {
+    open_GetAllApis?: {
+        content?: string
+        createTime?: string
+        deleteTime?: string
+        id?: string
+        method?: string
+        operationType?: string
+        remark?: string
+        restUrl?: string
+        roleType?: string
+        roles?: string
+        title?: string
+        updateTime?: string
+    }[],
+}
+
+    
+export interface GetAllRolesResponse {
+    data?: GetAllRolesResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface GetAllRolesResponseData {
+    open_GetAllRoles?: {
+        code?: string
+        remark?: string
+    }[],
+}export interface GetRoleBindApisInput {
+     code: string
+                 roleType?: string
+            
+}
+export interface InternalGetRoleBindApisInput {
+      code: string
+      roleType?: string
+}
+export interface InjectedGetRoleBindApisInput {
+     code: string
+         roleType?: string
+    
+}
+
+
+    
+export interface GetRoleBindApisResponse {
+    data?: GetRoleBindApisResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface GetRoleBindApisResponseData {
+    open_GetRoleBindApis?: {
+        content?: string
+        createTime?: string
+        deleteTime?: string
+        id?: string
+    }[],
+}export interface Post__CreateOneInput {
      content?: string
                  poster?: string
                  publishedAt?: string
@@ -422,6 +521,52 @@ export interface Post__UpdateOneResponseData {
         publishedAt?: string
         title?: string
     },
+}
+
+    
+export interface Statistics__MonthlySalesResponse {
+    data?: Statistics__MonthlySalesResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface Statistics__MonthlySalesResponseData {
+    data?: {
+        months?: string
+    }[],
+}
+
+    
+export interface Statistics__SaleTypePercentResponse {
+    data?: Statistics__SaleTypePercentResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface Statistics__SaleTypePercentResponseData {
+    data?: {
+        typeId?: number
+        typeName?: string
+    }[],
+}
+
+    
+export interface Statistics__SalesTop10Response {
+    data?: Statistics__SalesTop10ResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface Statistics__SalesTop10ResponseData {
+    data?: {
+        shopName?: string
+    }[],
+}
+
+    
+export interface Statistics__VisitTrendingResponse {
+    data?: Statistics__VisitTrendingResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface Statistics__VisitTrendingResponseData {
+    data?: {
+        count?: number
+        days?: string
+    }[],
 }export interface System__Menu__CreateOneInput {
      icon?: string
                  label: string
@@ -1149,6 +1294,21 @@ export interface System__Menu__UpdateOneResponseData {
         path?: string
         sort?: number
     },
+}
+
+    
+export interface System__Operation__GetManyResponse {
+    data?: System__Operation__GetManyResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface System__Operation__GetManyResponseData {
+    data?: {
+        createTime?: string
+        id?: string
+        method?: string
+        operationType?: string
+        title?: string
+    }[],
 }export interface System__Role__AddOneInput {
      code: string
                  remark?: string
@@ -1175,6 +1335,40 @@ export interface System__Role__AddOneResponseData {
         code?: string
         id?: number
         remark?: string
+    },
+}export interface System__Role__BindRoleApisInput {
+   allRoles: {
+   }[],
+               apis: {
+   }[],
+                 roleCode: string
+            
+}
+export interface InternalSystem__Role__BindRoleApisInput {
+    allRoles: {
+    }[],
+    apis: {
+    }[],
+      roleCode: string
+}
+export interface InjectedSystem__Role__BindRoleApisInput {
+   allRoles: {
+   }[],
+       apis: {
+   }[],
+         roleCode: string
+    
+}
+
+
+    
+export interface System__Role__BindRoleApisResponse {
+    data?: System__Role__BindRoleApisResponseData
+    errors?: ReadonlyArray<GraphQLError>;
+}
+export interface System__Role__BindRoleApisResponseData {
+    open_BindRoleApis?: {
+        count?: number
     },
 }export interface System__Role__ConnectOneMenuInput {
      id?: number

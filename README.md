@@ -68,8 +68,8 @@ cd server
 
 ### 启动后修改
 
-1. 修改身份认证相关配置
-2. 修改数据源配置，当前项目中使用 `sqlite` 作为示例数据源
+1. 修改身份认证相关配置：参考[身份认证服务商准备章节](https://ansons-organization.gitbook.io/product-manual/huan-jing-zhun-bei#shen-fen-ren-zheng-oidc)准备认证服务商，参考[配置身份认证章节](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/yan-zheng-he-shou-quan/shen-fen-yan-zheng)修改当前的身份认证配置。
+2. 修改数据源配置，当前项目中使用 `sqlite` 作为示例数据源，请根据实际情况修改
 3. 回调地址修改
 
 ### Prisma 结构

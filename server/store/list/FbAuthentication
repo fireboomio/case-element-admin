@@ -1,14 +1,8 @@
 [
 	{
-		"id": 1521691663073280,
-		"point": "http://localhost:9991/auth/cookie/authorize/auth0?redirect_uri=",
-		"name": "auth0",
 		"authSupplier": "openid",
-		"switchState": [
-			"cookieBased"
-		],
 		"config": {
-			"id": "auth0",
+			"AuthorizationEndpoint": "https://erguotou.jp.auth0.com/authorize",
 			"clientId": {
 				"key": "",
 				"kind": "0",
@@ -19,18 +13,58 @@
 				"kind": "0",
 				"val": "y1ecLIREalDgjVF63d5l8o0NYjZXe-bRe7QbnRZ6zwShNNuaEEs7kRf8o7BbhQgG"
 			},
-			"issuer": "https://erguotou.jp.auth0.com",
 			"discoveryURL": "",
+			"id": "auth0",
+			"issuer": "https://erguotou.jp.auth0.com",
 			"jwks": 0,
 			"jwksJSON": "",
 			"jwksURL": "https://erguotou.jp.auth0.com/.well-known/jwks.json",
-			"userInfoEndpoint": "https://erguotou.jp.auth0.com/userinfo",
+			"tokenEndpoint": "https://erguotou.jp.auth0.com/oauth/token",
 			"userInfoCacheTtlSeconds": 0,
-			"AuthorizationEndpoint": "https://erguotou.jp.auth0.com/authorize",
-			"tokenEndpoint": "https://erguotou.jp.auth0.com/oauth/token"
+			"userInfoEndpoint": "https://erguotou.jp.auth0.com/userinfo"
 		},
 		"createTime": "2023-03-29 07:35:16Z",
-		"updateTime": "2023-03-29 09:34:33Z",
+		"deleteTime": "",
+		"id": 1521691663073280,
+		"name": "auth0",
+		"point": "http://localhost:9991/auth/cookie/authorize/auth0?redirect_uri=",
+		"switchState": [
+			"cookieBased"
+		],
+		"updateTime": "2023-03-29 09:34:33Z"
+	},
+	{
+		"id": 1572762633895936,
+		"point": "http://localhost:9991/auth/cookie/authorize/casdoor?redirect_uri=",
+		"name": "casdoor",
+		"authSupplier": "openid",
+		"switchState": [
+			"tokenBased"
+		],
+		"config": {
+			"id": "casdoor",
+			"clientId": {
+				"key": "",
+				"kind": "0",
+				"val": "4c2d17126365f4c1f475"
+			},
+			"clientSecret": {
+				"key": "",
+				"kind": "0",
+				"val": "2854015114dd76ac630e4182412e59b7179db6e2"
+			},
+			"issuer": "http://localhost:8000",
+			"discoveryURL": "",
+			"jwks": 0,
+			"jwksJSON": "",
+			"jwksURL": "http://localhost:8000/.well-known/jwks.json",
+			"userInfoEndpoint": "http://localhost:8000/api/userinfo",
+			"userInfoCacheTtlSeconds": 0,
+			"AuthorizationEndpoint": "http://localhost:7001/login/oauth/authorize",
+			"tokenEndpoint": "http://localhost:8000/api/login/oauth/access_token"
+		},
+		"createTime": "2023-04-07 08:03:17Z",
+		"updateTime": "2023-04-07 08:07:52Z",
 		"deleteTime": ""
 	}
 ]
