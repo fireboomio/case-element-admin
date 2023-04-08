@@ -67,12 +67,23 @@ pnpm run watch
 cd server
 ./fireboom dev
 ```
+### 端口说明
 
-### 启动后修改
+上述命令，启动了4个端口。
 
-1. 修改身份认证相关配置：参考[身份认证服务商准备章节](https://ansons-organization.gitbook.io/product-manual/huan-jing-zhun-bei#shen-fen-ren-zheng-oidc)准备认证服务商，参考[配置身份认证章节](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/yan-zheng-he-shou-quan/shen-fen-yan-zheng)修改当前的身份认证配置。
-2. 回调地址修改：目前项目中使用的是 auth0 创建的一个身份认证服务，如果你修改了第1步的身份认证，请点击 Fireboom 控制台中配置的身份验证的详情，复制“登录回调地址”的值并前往你配置的身份认证服务提供商的应用配置中添加该回调地址。同时点击 Fireboom 控制台中的设置 -> 安全 -> 增加重定向URL，添加当前 admin 项目的域名地址。
-3. 修改数据源配置：当前项目中使用 `sqlite` 作为示例数据源，如果需要使用其它数据库请根据实际情况修改，[参考数据源配置文档](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/shu-ju-yuan/shu-ju-ku/shu-ju-ku-lian-jie)
+- 3000：前端项目开发模式下占用的端口
+- 9991：后端项目的API端口，飞布开发的API，通过该端口暴露
+- 9123：飞布控制台占用的端口
+- 9992：飞布钩子服务占用的端口（不对外暴露）
+
+各端口对应的域名，可前往 gitpod 底部面板的PORTS中获取。
+
+### 快速上手
+
+1. 系统配置：前往 设置-> 系统 ，修改 API外网地址 为 9991 端口对应的域名。
+2. 修改身份认证相关配置：参考[身份认证服务商准备章节](https://ansons-organization.gitbook.io/product-manual/huan-jing-zhun-bei#shen-fen-ren-zheng-oidc)准备认证服务商，参考[配置身份认证章节](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/yan-zheng-he-shou-quan/shen-fen-yan-zheng)修改当前的身份认证配置。
+3. 回调地址修改：目前项目中使用的是 auth0 创建的一个身份认证服务，如果你修改了第2步的身份认证，请点击 Fireboom 控制台中配置的身份验证的详情，复制“登录回调地址”的值并前往你配置的身份认证服务提供商的应用配置中添加该回调地址。同时点击 Fireboom 控制台中的设置 -> 安全 -> 增加重定向URL，添加当前 admin 项目的域名地址（3000端口对应的域名）。
+4. 修改数据源配置：当前项目中使用 `sqlite` 作为示例数据源，如果需要使用其它数据库请根据实际情况修改，[参考数据源配置文档](https://ansons-organization.gitbook.io/product-manual/kai-fa-wen-dang/shu-ju-yuan/shu-ju-ku/shu-ju-ku-lian-jie)
 
 
 ### Prisma 结构
