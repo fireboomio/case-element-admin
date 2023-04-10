@@ -14,7 +14,7 @@ import {
 import { merge } from '@/utils';
 import WangEditor from '@/components/WangEditor/index.vue';
 import { FormItemRule } from 'element-plus';
-import { Arrayable } from 'element-plus/es/utils';
+import type { Arrayable } from 'element-plus/es/utils';
 
 const queryFormRef = ref(ElForm);
 const dataFormRef = ref(ElForm);
